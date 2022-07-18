@@ -1,0 +1,718 @@
+{
+  "component": {
+    "row_per_page": "Rows per page",
+    "no_data": "No data found",
+    "sorry_cant_find": "Sorry we coundn't find any matches for this period",
+    "try_another_day": "Please try another day",
+    "instruction": "Instruction",
+    "no_data_1": "No",
+    "no_data_2": "has been created",
+    "create_first": "create first",
+    "delete": {
+      "text": " Are you sure you want to delete?"
+    },
+    "update_at": "Update at",
+    "wizard": {
+      "processing": {
+        "preprocessing": "Pre-processing",
+        "model": "Model Configuration",
+        "postprocessing": "Post-processing"
+      },
+      "datasource": {
+        "connect_data": "Connect data",
+        "create_table": "Create tables",
+        "create_dataset": "Create final dataset"
+      }
+    },
+    "popover": {
+      "view_detail": "View detail",
+      "setting": "Setting",
+      "run_job": "Run this job",
+      "stop_job": "Stop this job",
+      "integrate": "Intergrate",
+      "sample_data": "Sample Data",
+      "upload_file": "Upload file",
+      "connect_database": "Connect your database",
+      "my_profile": "My profile",
+      "log_out": "Log out",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_all": "Delete All",
+      "run": "Run"
+    },
+    "navbar": {
+      "dashboard": "Dashboard",
+      "dataset": "Datasets",
+      "scenario": "Scenarios",
+      "job": "Jobs",
+      "doc": "Documentation"
+    },
+    "show_result": {
+      "title": "Data Preview"
+    },
+    "button": {
+      "go_job": "Set your job",
+      "next": "Next",
+      "back": "Back",
+      "agree": "Agree",
+      "close": "Close",
+      "disagree": "Disagree",
+      "create_table": "Create Table",
+      "create_dataset": "Create Dataset",
+      "create_scenario": "Go to scenario",
+      "add_more": "Add more",
+      "save": "Save",
+      "saved": "Saved",
+      "add_condition": "Add condition",
+      "preview": "Preview",
+      "submit": "Submit",
+      "connect": "Connect"
+    },
+    "radio_button": {
+      "select_all": "Select All"
+    },
+    "required": "Required"
+  },
+  "pages": {
+    "preprocessing": {
+      "breadcrumbs": {
+        "scenario": "Scenario",
+        "create": "Create",
+        "connect_db": "Connect data",
+        "create_dataset": "Create final dataset"
+      },
+      "task": {
+        "title": "Task",
+        "add_new": "Add new task",
+        "button": {
+          "reset": "Reset",
+          "run_all": "Run All"
+        }
+      },
+      "confirm": {
+        "text": "Are you sure you want to save all tasks above for preprocess?"
+      },
+      "add_task": {
+        "title": "Add new task",
+        "title_update": "Update task",
+        "name": "Task name",
+        "function": "Function",
+        "column": "Column",
+        "action": "Action",
+        "update": "Update",
+        "new_column": "New column",
+        "insert": "Insert as",
+        "create": "Create",
+        "validation": {
+          "name": {
+            "empty": "Required",
+            "not_valid": "Not valid",
+            "min": "Must have min 5 characters"
+          },
+          "function": {
+            "empty": "Required"
+          },
+          "input_column": {
+            "empty": "At least one checked"
+          },
+          "new_column": {
+            "empty": "Required"
+          }
+        }
+      }
+    },
+    "model": {
+      "title1": "Model Training Monitor",
+      "training_status": "Training Status",
+      "status": {
+        "done": "Done",
+        "running": "Running",
+        "fail": "Failed"
+      },
+      "title2": "Set up Model",
+      "advanced": "Advanced",
+      "train": "Train",
+      "form": {
+        "model": "Model",
+        "item_id": "Item ID",
+        "user_id": "User ID",
+        "user_interaction": "User interaction",
+        "weight_trending": {
+          "title": "WEIGHT ON TRENDING ITEMS",
+          "explain": "HIGHER THE WEIGHT INCREASES THE PROBABILITY OF TRENDING ITEMS ARE RECOMMENDED",
+          "title2": "WEIGHT ON ACCURACY - DIVERSITY DEGREE",
+          "explain2": "HIGHER THE WEIGHT INCREASES DIVERSITY OF RECOMMENDED ITEM. LOWER THE WEIGHT INCREASES ACCURACY",
+          "highly_accurate": "Highly accurate",
+          "accurate": "Accurate",
+          "balance": "Balance",
+          "diverse": "Diverse",
+          "highly_diversed": "Highly diversed"
+        },
+        "params": {
+          "very_low": "Extremely low",
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High",
+          "very_high": "Extremely high"
+        },
+        "cb": {
+          "title": "Feature Configuration",
+          "explain": "AT LEAST ONE FEATURE MUST BE CONFIGURATED.",
+          "non_text": "NON-TEXT FEATURE",
+          "text": "TEXT FEATURE",
+          "column": "COLUMN",
+          "method": "METHOD",
+          "weight": "WEIGHT",
+          "metric": "METRIC"
+        }
+      },
+      "evaluate": {
+        "title": "Model Evaluation (Optional)",
+        "form": {
+          "dataset": "Test data",
+          "top": "Number of recommended items",
+          "evaluate": "Evaluate"
+        },
+        "evaluate_metric": "Evaluation metrics",
+        "mean_precision": "Mean Precision",
+        "mean_precision_hover": "True positive/ (True positive + False positive)",
+        "mean_recall": "Mean Recall",
+        "mean_recall_hover": "True positive/ (True positive + False negative)",
+        "at_k": "Mean average precision at k",
+        "at_k_hover": "% accurate item from rank 1 through rank k position as prediction",
+        "coverage": "Coverage",
+        "coverage_hover": "% all item got covered in th result",
+        "novelty": "Novelty",
+        "novelty_hover": "Trending degree of the result"
+      }
+    },
+    "postprocessing": {
+      "confirm": {
+        "text": "Are you sure you want to save all tasks above for preprocess?"
+      },
+      "title": "Business Requirement",
+      "number_item": "Number of return items",
+      "random": "Randomize result",
+      "priority": "Create prioritized item list",
+      "group_by": "Recommend a group of items only",
+      "filter_history": "Filter history",
+      "dataset": "Dataset",
+      "item_id": "Item ID",
+      "group_column": "Group column",
+      "column": "Column",
+      "filter": "Filter",
+      "value": " Value",
+      "condition": "Condition",
+      "upload_file": "Create a new one from your computer",
+      "search_id": "Search ID",
+      "search_id_placeholder": "Search",
+      "id": "ID",
+      "item_info": "Item Info Dataset (Optional)",
+      "item_info_placeholder": "Select dataset for metadata",
+      "result": "Recommendation result"
+    },
+    "dataset": {
+      "title": "Dataset",
+      "title2": "Dataset Management",
+      "add_new": "Add new dataset",
+      "search": "Search",
+      "column": {
+        "name": "Name",
+        "des": "Description",
+        "created_at": "Created at",
+        "show_column": "Show column",
+        "column": "Column",
+        "active_scenario": "Active Scenario",
+        "active_job": "Active Job",
+        "row": "Row"
+      }
+    },
+    "scenario": {
+      "title": "Scenario",
+      "title2": "Scenario Management",
+      "add_new": "Add new scenario",
+      "search": "Search",
+      "api": "Request recommendations for this scenario using sample code below.",
+      "download": "The downloading file will only be a part of the result. Do you want to download it?",
+      "column": {
+        "name": "Scenario name",
+        "dataset": "Dataset",
+        "des": "Description",
+        "model_status": "Modeling Status",
+        "model": "Model",
+        "status": "Status",
+        "job": "Job",
+        "created_at": "Created at",
+        "show_column": "Show column",
+        "done": "Done",
+        "undone": "Undone"
+      }
+    },
+    "job": {
+      "title": "Job",
+      "title2": "Job Management",
+      "add_new": "Add new job",
+      "job_detail": "Job detail",
+      "search": "Search",
+      "column": {
+        "name": "Job name",
+        "scenario": "Scenario name",
+        "crontab": "Crontab",
+        "schedule": "Schedule",
+        "status": "Status",
+        "dataset": "Dataset",
+        "running": "Running",
+        "not_run": "Not run",
+        "hour": "Hour",
+        "day_month": "Day of the month",
+        "month": "Month",
+        "day_week": "Day of the week",
+        "success": "Success",
+        "in_progress": "In-progress"
+      },
+      "job_logger": "Job logger",
+      "fail": "Fail",
+      "success": "Success",
+      "stop_text": "Job is running! Are you sure you want to stop this job?",
+      "run_text": "Are you sure you want to run this job?"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "overview": "Overview",
+      "dataset": "Dataset information",
+      "scenario": "Scenario information",
+      "job": "Job information",
+      "datasource": "Datasource",
+      "active_dataset": "Dataset",
+      "active_scenario": "Scenario",
+      "running_job": "Running Job"
+    },
+    "datasource": {
+      "title": "Datasource",
+      "title2": "Datasource Management",
+      "add_new": "Add new",
+      "file": "Files",
+      "database": "Database",
+      "table": "Table",
+      "title_upload": "Upload your file here",
+      "title_upload2": "FILE SHOULD BE CSV",
+      "skip": "Quick import without editing",
+      "drop_file": "Drop a file",
+      "file_review": "File review",
+      "data_preview": "Data Preview",
+      "form": {
+        "database": "Database",
+        "database_ip": "Database IP",
+        "database_port": "Database Port",
+        "database_user": "Database User",
+        "password": "Access Password",
+        "database_name": "Database Name"
+      },
+      "table_config": {
+        "title": "Config Table",
+        "title2": "Table Management",
+        "dataset": "Datasource",
+        "table": "Table",
+        "column": "COLUMN",
+        "alias": "Alias",
+        "name": "Name",
+        "database": "Database",
+        "description": "Description",
+        "created_at": "Created at",
+        "show_column": "Show column",
+        "select": "Select",
+        "select_all": "Select All"
+      },
+      "transformation": {
+        "name": "Dataset Name",
+        "title": "Create Dataset",
+        "select": "Select",
+        "table": "Table",
+        "join": "Join",
+        "where": "Where",
+        "filter": "Filter",
+        "column": "Column",
+        "condition": "Condition",
+        "value": "Value",
+        "add_condition": "Add Condition"
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "general": "General",
+      "change_password": "Change Password",
+      "full_name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "requirement": "Requirement",
+      "company": "Company",
+      "address": "Address",
+      "api_key": "Api key",
+      "current_password": "CURRENT password",
+      "new_password": "New password",
+      "repeat_password": "CONFIRMATION password",
+      "upload_photo": "Upload Photo",
+      "allow": "Allow",
+      "max_size": "Max size of"
+    },
+    "document": {
+      "title": "HƯỚNG DẪN SỬ DỤNG RECOMMENDATION PLATFORM",
+      "part_a": {
+        "title": "A. GIỚI THIỆU",
+        "part_1": {
+          "title": "I. Giới thiệu về platform",
+          "text": "Recommendation Platform được sử dụng cho việc cung cấp các gợi ý cho khách hàng của một sản phẩm/dịch vụ để tăng trải nghiệm của khách hàng trong quá trình sử dụng. Sản phẩm recommendation platform của FPT Telecom đã được tạo nên sau quá trình nghiên cứu, huấn luyện mô hình để mang lại kết quả tốt nhất cho người dùng, giúp người dùng có thể đạt được hiệu quả mong muốn trong kinh doanh."
+        },
+        "part_2": {
+          "title": "II. Giới thiệu về tài liệu",
+          "text": "Tài liệu này hướng dẫn người dùng cách sử dụng các chức năng trên sản phẩm Recommendation Platform bao gồm :",
+          "content": {
+            "push": "Đẩy dữ liệu vào hệ thống",
+            "train": "Huấn luyện mô hình gợi ý và tuỳ chỉnh để đạt được kết quả mong muốn",
+            "set_up": "Set up luồng trả về kết quả tự động về hệ thống của người dùng"
+          }
+        },
+        "part_3": {
+          "title": "III. Phạm vi áp dụng :",
+          "table": {
+            "header": {
+              "stt": "STT",
+              "obj": "Hạng mục",
+              "des": "Mô tả"
+            },
+            "content": {
+              "obj": "Đối tượng",
+              "obj2": "Phạm vi",
+              "obj3": "Khuyến nghị kỹ thuật",
+              "des": "Tất cả khách hàng truy cập vào recom.fpt.vn",
+              "des2": "Dành cho các thành viên tham gia dự án",
+              "des2_1": "Các khách hàng có đăng ký sử dụng sản phẩm"
+            }
+          }
+        },
+        "part_4": {
+          "title": "IV. Định nghĩa thuật ngữ :",
+          "table": {
+            "header": {
+              "word": "Từ",
+              "mean": "Định nghĩa"
+            },
+            "content": {
+              "word": "Người dùng",
+              "word2": "Khách hàng",
+              "word3": "Model",
+              "word4": "Feature",
+              "word5": "Recommendation Platform",
+              "mean": "Người sử dụng sản phẩm recommendation platform",
+              "mean2": "Đối tượng mua/sử dụng sản phẩm được bán bởi người dùng hoặc tổ chức của người dùng",
+              "mean3": "Mô hình huấn luyện",
+              "mean4": "Các đặc tính của model, được thể hiện bằng các cột (column) trong dữ liệu",
+              "mean5": "Nền tảng gợi ý"
+            }
+          }
+        }
+      },
+      "part_b": {
+        "title": "B. HƯỚNG DẪN SỬ DỤNG CÁC CHỨC NĂNG:",
+        "part_1": {
+          "title": "I. Đăng nhập vào nền tảng",
+          "text": "Điền email và password đã được cung cấp để truy cập vào nền tảng"
+        },
+        "part_2": {
+          "title": "II. Hướng dẫn sử dụng theo một qui trình đầy đủ:",
+          "text": "Qui trình sử dụng recommendation platform được chia ra làm 3 bước chính. Người dùng có thể truy cập đến bất kì bước nào sử dụng thanh điều hướng bên trái",
+          "data_builder": {
+            "title": "1. DATA BUILDER",
+            "text": "Ở bước này, người dùng sẽ đẩy data của khách hàng và sản phẩm vào hệ thống và chuẩn bị data để sẵn sàng đưa vào mô hình huấn luyện. Trong data builder có 3 bước phụ giúp người dùng chuẩn bị data tốt hơn, mang đến kết quả gợi ý tốt hơn",
+            "connect_data": {
+              "title": "1.1 Connect Data:",
+              "text": "Cách 1: Để bắt đầu kết nối/upload dữ liệu, chọn nút",
+              "text2": "để kết nối với SQL database hoặc upload file data có đuôi .csv",
+              "text3": "Cách 2: sử dụng Restful API thông qua giao thức HTTP, giúp dễ dàng tích hợp (integration) vào các ứng dụng phía backend. Tạo 1 http request ới 1 số thông tin như sau",
+              "text4": "Post",
+              "text4_b": "Method:",
+              "text5": "Authorization: <<private token>>",
+              "text5_b": "Headers: ",
+              "text6": "<<your data>>",
+              "text6_b": "Body:",
+              "text12_b": "Endpoint:",
+              "text12": "https://recom.fpt.vn/api/v0.1/recommendation/dataset/{dataset_name}/{method}",
+              "text7": "Trong đó:",
+              "text8": "Token riêng của từng tài khoản, có thể lấy ở https://recom.fpt.vn/app/profile",
+              "text8_b": "Private token: ",
+              "text9": "dữ liệu ở dạng List of Json. Lưu ý: schema của các json object phải giống nhau. Ví dụ : [{name: ”David”}, {name: “Bod”}, {name: “Kelly”}]",
+              "text9_b": "Your data: ",
+              "text10": "tên dataset",
+              "text10_b": "dataset_name: ",
+              "text11": " “overwrite” (ghi đè data cũ) hoặc “append” (thêm data mới)",
+              "text11_b": "Method: ",
+              "note": "Chú ý: ",
+              "note_text": "Nên sử dụng các net package có sẵn của ngôn ngữ hoặc thư viện bên thứ 3 để hỗ trợ việc tạo HTTP request tùy thuộc ngôn ngữ phía back-end.",
+              "sample": "Ví dụ: ",
+              "sample_text": "Axios với NodeJS, HttpURLConnection đối với Java, HttpClient đối với C#, net/http của Golang, …"
+            },
+            "create_table": {
+              "title": "1.2 Create tables:",
+              "text": "Từ data được kết nối, người dùng có thể tạo các bảng nhỏ chỉ chứa các cột/thông tin sẽ được sử dụng để huấn luyện model.",
+              "text2": "Các loại thông tin cần thiết cho model: ",
+              "text3_b": "Item-based Model: ",
+              "text3": "Item ID và các thông tin khác liên quan đến sản phẩm : Miêu tả, Màu sắc, Nhóm sản phẩm…",
+              "text4_b": "User-based Model: ",
+              "text4": "Item ID, User ID, thông tin tương tác giữa user và sản phẩm (rating)"
+            },
+            "create_final": {
+              "title": "1.3 Create final dataset",
+              "text": "Đây là bước cuối cùng để người dùng chuẩn bị data. Ở bước này, người dùng có thể làm gọn dữ liệu hơn bằng các chức năng Filter (Lọc) hoặc Join ( kết hợp các bảng với nhau). Sau khi xử lí dữ liệu xong, ấn nút",
+              "text2": "để kiểm tra lại dữ liệu rồi ấn",
+              "text3": "để hoàn thành tác vụ tạo dữ liệu."
+            }
+          },
+          "scenario": {
+            "title": "2. SCENARIOS",
+            "text": "Đây là nơi để người dùng tạo các model khác nhau để đưa ra kết quả phù hợp với các mục đích kinh doanh khác nhau.",
+            "text2": "Để tạo 1 scenario mới ấn nút",
+            "text3": "và điền thông tin. Trong Scenarios có 3 bước phụ để tạo ra kết quả đầu ra cuối cùng.",
+            "preprocessing": {
+              "title": "2.1 Preprocessing",
+              "text": "Đây là bước tiền xử lí dữ liệu, giúp người dùng có thể chỉnh sửa dữ liệu thành định dạng mong muốn ( VD: chuyển từ chữ tiếng việt có dấu sang không dấu, chỉ lấy năm từ trong cột ngày,…) .",
+              "text2": "Để tạo tác vụ chỉnh sửa mới, ấn",
+              "text3": "sau đó điền thông tin các mục sau :",
+              "text4_b": "Task name: ",
+              "text4": "tên tác vụ",
+              "text5_b": "Function: ",
+              "text5": "Hàm muốn dùng để xử lí dữ liệu",
+              "text6": "Column: ",
+              "text6_b": "Chọn cột muốn xử lí",
+              "text7": "Update/Insert: ",
+              "text7_b": "chọn Update để cập nhật/in đè lên cột cũ hoặc Insert để tạo cột mới",
+              "text8": "Sau đó ấn",
+              "text9": "để hoàn thành việc tạo tác vụ. Để áp dụng tất cả tác vụ vào bảng dữ liệu ấn",
+              "text10": "Nếu muốn quay lại về bảng dữ liệu ban đầu ấn",
+              "text11": "Để chỉnh sửa tác vụ cũ, ấn vào dấu",
+              "text12": "ở cuối dòng của mỗi tác vụ, thực hiện sửa đổi rồi ấn",
+              "text13": "để hoàn thành."
+            },
+            "model": {
+              "title": "2.2 Model Configuration: ",
+              "text": "Sau khi tiền xử lí, người dùng đến bước này để cài đặt, điều chỉnh Model và huấn luyện dữ liệu. Hiện tại nền tảng cung cấp 2 lựa chọn cho model (User-based và Item-based) .Người dùng cần cài đặt các thông số sau để model có thể hoạt động:",
+              "model1": {
+                "title": "2.2.1. MODEL 1: Recommended For You (User-Based): ",
+                "text": "Model được xây dựa trên thông tin dữ liệu giữa người dùng và sản phẩm. Kết quả trả về sẽ là các sản phẩm tương tự cho những người dùng giống nhau.",
+                "text2": "Ví dụ: George và Jen có các đặc điểm giống nhau do cùng mua chung 2 loại kẹo. Hệ thống gợi ý sẽ gợi ý sản phẩm mới cho George chính là một loại kẹo khác mà Jen đã mua.",
+                "text3": "Các thông số cần điền :",
+                "text4_b": "Item ID: ",
+                "text4": "Người dùng chỉ ra cột nào chứa ID của sản phẩm",
+                "text5_b": "User ID: ",
+                "text5": "Người dùng chỉ ra cột nào chứa ID của khách hàng",
+                "text6_b": "User interaction: ",
+                "text6": "Người dùng chỉ ra cột nào chứa thông tin tương tác giữa người dùng và sản phẩm ( Ví dụ : Rating)",
+                "text7": "Ngoài ra model có thêm 2 thông số nâng cao sau để người dùng có thể tuỳ chỉnh mức độ (không bắt buộc).",
+                "text8_b": "Weight on trending items: ",
+                "text8": "Thông số dùng để ưu tiên các sản phẩm đang ở trong top các sản phẩm “trending” – được yêu thích nhất ở thời điểm hiện tại. Lựa chọn mức độ từ 1 đến 5 cho thông số này khi muốn kết quả trả về có các sản phẩm trong nhóm trending ( Low là thấp nhất, Very High là cao nhất)",
+                "text9_b": "Weight on Accuracy – Diversity degree: ",
+                "text9": "Thông số dùng để ưu tiên sự chính xác hoặc đa dạng của sản phẩm đầu ra. Theo thang điểm, nếu chọn về phía bên trái thì kết qủa đầu ra sẽ nghiêng về độ chính xác ( phù hợp đúng với sở thích của khách hàng trong lịch sử). Ngược lại, nếu chọn về phía bên phải thì kết quả đầu ra nghiêng về sự đa dạng của gợi ý ( khách hàng sẽ nhìn thấy các sản phẩm thuộc cái nhóm khác nhau, kể cả những loại họ chưa xem bao giờ giúp họ khám phá được các sản phẩm khác với sở thích vốn có).",
+                "text10_b": "MODEL EVALUATION: ",
+                "text10": "Sau khi train xong model này, sẽ hiện ra bảng Model evaluation để người dùng đánh giá lại model đang dùng và tinh chỉnh tuỳ theo chỉ số mong muốn.",
+                "text11": "Thông số cần điền :",
+                "text12_b": "Test data: ",
+                "text12": "bảng dữ liệu có chứa lịch sử thực tế của end-user",
+                "text13_b": "Number of recommended items: ",
+                "text13": "số lượng item hiển thị mỗi lần gợi ý",
+                "text14": "Sau khi ấn",
+                "text15": "các chỉ số đánh giá model sẽ hiện lên: ",
+                "text16_b": "Mean Precision: ",
+                "text16": "chỉ số này cho biết độ chính xác của model (trong tất cả các kết quả dự đoán thì có bao nhiêu kết quả người dùng thực sự tương tác)",
+                "text17_b": "Mean Recall: ",
+                "text17": "chỉ số này cho biết độ bao phủ của kết quả dự đoán (có bao nhiêu dự đoán đúng trong tổng lượt tương tác thực tế của người dùng )",
+                "text18_b": "Mean precision at k: ",
+                "text18": "Độ chính xác được tính với số lượng gợi ý nhất định cho mỗi user ( VD k = 10 , chỉ số thể hiện độ chính xác của 10 item đầu tiên được gợi ý cho mỗi user)",
+                "text19_b": "Coverage: ",
+                "text19": "chỉ số chỉ độ bao phủ của kết quả gợi ý (số càng cao nghĩa là kết quả gợi ý bao phủ được nhiều item có sẵn)",
+                "text20_b": "Novelty: ",
+                "text20": "chỉ số chỉ độ phổ biến của item (số càng cao nghĩa là kết quả gợi ý chưa nhiều item phổ biến)"
+              },
+              "model2": {
+                "title": "2.2.2 MODEL 2: Related Item (Content-Based): ",
+                "text": "Model được xây dựng chỉ dựa trên thông tin của sản phẩm. Kết quả trả về là các sản phẩm tương tự với sản phẩm mà người dùng đã sử dụng/xem.",
+                "text2": "Ví dụ : Khách hàng thích sản phẩm 1 và 2, sản phẩm 3 có nội dung tương tự sản phẩm 1. Vậy sản phẩm 3 sẽ được gợi ý cho khách hàng.",
+                "text3": "Các thông số cần điền :",
+                "text4_b": "Item ID: ",
+                "text4": "Người dùng chỉ ra cột nào chứa ID của sản phẩm",
+                "text5": "Non-text Feature ( Các cột mà định dạng data không phải là text): ",
+                "text6_b": "Column: ",
+                "text6": "Người dùng chọn một cột không phải là text",
+                "text7_b": "Weight: ",
+                "text7": "Chọn mức độ theo nhu cầu. Nếu muốn ưu tiên cột này thì chọn High hoăc Very high",
+                "text8": "Sử dụng nút",
+                "text9": "để chọn thêm cột.",
+                "text10": "Text Feature (Các cột mà định dạng data là text): ",
+                "text11_b": "Column: ",
+                "text11": "Người dùng chọn một cột định dạng là text",
+                "text12_b": "Method: ",
+                "text12": "Phương pháp biến đổi text có 3 lựa chọn (tfidf, word2vec, doc2vec) . Riêng phương pháp doc2vec được dùng trong trường hợp muốn sử dụng ngữ cảnh của câu ( tiêu đề, mô tả…)",
+                "text13_b": "Weight: ",
+                "text13": "Chọn mức độ theo nhu cầu. Nếu muốn ưu tiên cột này thì chọn High hoăc Very high."
+              }
+            },
+            "postprocessing": {
+              "title": "2.3 Post-processing: ",
+              "text": "Bước này dành cho người dùng được tuỳ chỉnh, sắp xếp các gợi ý theo mục đích kinh doanh.",
+              "text2": "Chức năng tuỳ chỉnh model để sắp xếp, chỉnh sửa kết quả: Các tuỳ chỉnh được hiện trong phần “Business Requirements”",
+              "text3_b": "Number of return items: ",
+              "text3": "Số lượng sản phẩm muốn gợi ý cho từng khách hàng",
+              "text4_b": "Random Choose: ",
+              "text4": "sắp xếp ngẫu nhiên các sản phẩm gợi ý trong danh sách hiện lên cho khách hàng, phục vụ mục đích làm mới phần gợi ý.",
+              "text5_b": "Filter user history: ",
+              "text5": "Không gợi ý những sản phẩm khách hàng đã xem/sử dụng.",
+              "text6": "Chọn bảng lưu lịch sử xem/sử dụng của khách hàng từ database đã tạo sẵn hoặc upload file .csv.",
+              "text7_b": "Create Prioritized Item List: ",
+              "text7": "Tạo danh sách các sản phẩm ưu tiên được xuất hiện lên trên và nhiều hơn",
+              "text8_b": "Dataset: ",
+              "text8": "Chọn bảng có chứa thông tin các sản phẩm ưu tiên",
+              "text9_b": "Column: ",
+              "text9": "Chọn cột ID của sản phẩm",
+              "text10_b": "Filter: ",
+              "text10": "Nếu sản phẩm ưu tiên nằm trong 1 bảng lớn hơn, có thể lọc ra bằng sử dụng chức năng filter",
+              "text11_b": "Column: ",
+              "text11": "Cột có giá trị muốn filter",
+              "text12_b": "Condition: ",
+              "text12": "điều kiện muốn filter ( lớn hơn, lớn hơn hoặc bằng, nhỏ hơn, nhỏ hơn hoặc bằng, bằng , khác)",
+              "text13_b": "Value: ",
+              "text13": "Các giá trị muốn ưu tiên",
+              "text14": "Sau khi hoàn thành phần Business Requirements theo nhu cầu, click di chuyển sang phần click",
+              "text15": "để lưu lại cài đặt hoặc di chuyển sang thanh tìm kiếm để xem thử kết quả có đúng như ý muốn không bằng cách ấn",
+              "text16_b": "Chức năng 'Tìm Kiếm':  ",
+              "text16": "Nhập Item ID hoặc User ID (tùy theo loại model) để xem kết quả gợi ý cho từng ID. Riêng trong model Recommended for You người dùng có thể lựa chọn bảng có chứa có thông tin của từng item để nhìn rõ hơn các sản phẩm được gợi ý cho khách hàng tên là gì. Nếu không chọn thì dữ liệu nhìn thấy chỉ là Item ID."
+            }
+          },
+          "job": {
+            "title": "3. JOBS",
+            "text": "Sau khi cài đặt được mô hình mang lại kết quả theo mong muốn, người dùng tiếp tục di chuyển đến phần JOBS để tạo luồng gửi kết quả đến database qua API theo thời gian cố định",
+            "text2": "Để tạo Job mới, ấn nút",
+            "text3": "Sau đó điền thông tin các mục và cài đặt thời gian theo CRONTAB.",
+            "text4_b": "Hướng dẫn cài đặt thời gian theo crontab:",
+            "text4": "Có 4 trường xác định thời gian :",
+            "text5_b": "Hour: ",
+            "text5": "Giờ (0-23)",
+            "text6_b": "Day of month: ",
+            "text6": "Ngày trong tháng (1-31)",
+            "text7_b": "Month: ",
+            "text7": "Tháng (1-12)",
+            "text8_b": "Day of week: ",
+            "text8": "(0-6) (Chủ nhật = 0)",
+            "text9": "Nếu ô nào được điền kí tự * có nghĩa là tác vụ sẽ được chạy ở mọi giá trị cho trường thời gian đó. Ví dụ * được gán ở Hour , tác vụ được chạy mỗi tiếng 1 lần .",
+            "text10": "Nếu ô được gán kí tự số (0,1,2,3…) có nghĩa là tác vụ được chạy ở đúng số giờ, ngày, tháng đó. Ví dụ ở ô Day of month có kí tự 2, có nghĩa là tác vụ được chạy ở ngày mùng 2 của tháng .",
+            "text11": "Tiếp theo, để hoàn thành chu trình đổ data về database riêng, vào phần Scenario, chọn Scenario vừa cài đặt job rồi hướng đến",
+            "text12": "chọn “Intergrate” để lấy Rest API."
+          }
+        }
+      },
+      "part_c": {
+        "title": "VÍ DỤ VỀ KỊCH BẢN THAO TÁC CỦA NGƯỜI DÙNG",
+        "text_b": "Người dùng :",
+        "text": "Nhân viên của công ty kinh doanh phim online",
+        "text2_b": "Mục đích của người dùng :",
+        "text2": "Cung cấp gợi ý cho từng khách hàng phù hợp nhu cầu kinh doanh",
+        "text3_b": "Nhu cầu: ",
+        "text3": "tương tác với nền tảng Recommendation Platform để tạo được model",
+        "text4_b": "Các bước phải làm để đạt được mục đích :",
+        "text5_b": "Kết quả đạt được: ",
+        "text5": "Tạo được model với các thông số dành riêng cho chiến dịch marketing"
+      }
+    },
+    "homepage": {
+      "button": {
+        "signup": "Sign up",
+        "signin": "Sign in",
+        "dashboard": "Dashboard",
+        "contact": "Contact"
+      },
+      "carousel": {
+        "title": "RECOMMENDATION PLATFORM",
+        "text": "Bring the best journey",
+        "text_b": "for your customers",
+        "text2": "Simple - Easy to use",
+        "text2_b": "Highly effective",
+        "text3": "Increase conversation rate and",
+        "text3_b": "revenue with best-in-class algorithms",
+        "text4": "Incredibly cost-effective and",
+        "text4_b": "resource-saving solution for businesses",
+        "try": "Start 14-day",
+        "free": "free now"
+      },
+      "content": {
+        "title": "ADVANCED ALGORITHMS",
+        "text": "Apply the best machine learning and deep",
+        "text2": "deep learning tốt nhất giúp mang lại",
+        "text3": "learning models to reach your business goals",
+        "text_2": "Content-based models",
+        "text_3": "User-based models",
+        "text_4": "Deep learning",
+        "title2": "USER-FRIENDLY PLATFORM",
+        "text5": "Simple, no-code and free of hassles FPT ",
+        "text5_b": "Recommendation is an all-in-one solution that ",
+        "text5_c": "easily access to all users",
+        "text6": "Full of built-in functions library",
+        "text7": "Easily integration with rest API",
+        "text8": "Real-time data pipeline",
+        "title3": "STEPS TO USE FPT RECOMMENDATION",
+        "steps": {
+          "step1": "Register",
+          "step1_b": "",
+          "step2": "Request",
+          "step2_b": "support",
+          "step3": "Build your own ",
+          "step3_b": "model",
+          "step4": "Integrate to your ",
+          "step4_b": "system",
+          "step5": "Track model ",
+          "step5_b": "performance"
+        },
+        "title4": "Need help? Send us a note",
+        "title_support": "Fill out the form below to get our support as soon as possible. "
+      }
+    },
+    "footer": {
+      "navigation": "Navigation",
+      "contact": "Contact Us",
+      "homepage": "Home",
+      "about": "About us",
+      "document": "Documentation",
+      "product": "Product & Business",
+      "email": "Email:",
+      "phone": "Phone:",
+      "support": "Support:"
+    },
+    "header": {
+      "homepage": "Home",
+      "about": "About us",
+      "document": "User guide",
+      "contact": "Contact us"
+    },
+    "authentication": {
+      "signup": {
+        "create_new_account": "Create new account",
+        "use_your_email": "Use your email to create new account",
+        "name": "Name",
+        "email": "Email Address",
+        "password": "Password",
+        "btn_signup": "SIGN UP NOW",
+        "have_an_account": "Have an account?",
+        "btn_signin": "Sign in",
+        "back": "Back to",
+        "homepage": "Homepage"
+      },
+      "signin": {
+        "header": "Sign in",
+        "description": "Sign in on the internal platform",
+        "email": "Email Address",
+        "password": "Password",
+        "submit": "SIGN IN NOW",
+        "text1": "Don't have an account?",
+        "signup": "Sign up",
+        "text2": "Back to",
+        "home": "Homepage"
+      }
+    }
+  }
+}

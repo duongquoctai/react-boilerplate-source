@@ -1,0 +1,452 @@
+{
+  "component": {
+    "row_per_page": "Số dòng mỗi trang",
+    "no_data": "Dữ liệu trống",
+    "sorry_cant_find": "Chúng tôi không tìm thấy dữ liệu trong khoảng thời gian này",
+    "try_another_day": "Vui lòng chọn ngày khác",
+    "instruction": "Đọc hướng dẫn",
+    "no_data_1": "Không tìm thấy",
+    "no_data_2": "được khởi tạo",
+    "create_first": "tạo mới",
+    "delete": {
+      "text": "Bạn có chắc muốn xóa?"
+    },
+    "update_at": "Cập nhật vào lúc",
+    "wizard": {
+      "processing": {
+        "preprocessing": "Tiền xử lí",
+        "model": "Cấu hình mô hình",
+        "postprocessing": "Hậu xử lí"
+      },
+      "datasource": {
+        "connect_data": "Kết nối nguồn dữ liệu",
+        "create_table": "Tạo bảng",
+        "create_dataset": "Tạo bộ dữ liệu cuối cùng"
+      }
+    },
+    "popover": {
+      "view_detail": "Xem chi tiết",
+      "setting": "Cài đặt",
+      "run_job": "Chạy tác vụ",
+      "stop_job": "Dừng tác vụ",
+      "integrate": "Tích hợp",
+      "sample_data": "Kết quả mẫu",
+      "my_profile": "Thông tin cá nhân",
+      "upload_file": "Chọn thư mục từ máy tính",
+      "connect_database": "Kết nối với cơ sở dữ liệu của bạn",
+      "log_out": "Đăng xuất",
+      "edit": "Chỉnh sửa",
+      "delete": "Xóa",
+      "delete_all": "Xóa tất cả",
+      "run": "Thực thi"
+    },
+    "navbar": {
+      "dashboard": "Bảng điều khiển",
+      "dataset": "Bộ dữ liệu",
+      "scenario": "Kịch bản",
+      "job": "Tác vụ",
+      "doc": "Tài liệu hướng dẫn"
+    },
+    "show_result": {
+      "title": "Xem trước dữ liệu"
+    },
+    "button": {
+      "go_job": "Thiết lập tác vụ",
+      "next": "Tiếp",
+      "back": "Quay lại",
+      "agree": "Đồng ý",
+      "close": "Đóng",
+      "disagree": "Không",
+      "create_table": "Tạo bảng",
+      "create_dataset": "Tạo bộ dữ liệu",
+      "create_scenario": "Tạo kịch bản",
+      "add_more": "Thêm mới",
+      "save": "Lưu lại",
+      "saved": "Đã lưu",
+      "add_condition": "Thêm điều kiện",
+      "preview": "Xem trước",
+      "submit": "Xác nhận",
+      "connect": "Kết nối"
+    },
+    "radio_button": {
+      "select_all": "Chọn tất cả"
+    },
+    "required": "Yêu cầu"
+  },
+  "pages": {
+    "preprocessing": {
+      "breadcrumbs": {
+        "scenario": "Kịch bản",
+        "create": "Tạo",
+        "connect_db": "Kết nối dữ liệu",
+        "create_dataset": "Khởi tạo bộ dữ liệu"
+      },
+      "task": {
+        "title": "Tác vụ",
+        "add_new": "Tạo tác vụ mới",
+        "button": {
+          "reset": "Khôi Phục",
+          "run_all": "Thực thi tất cả"
+        }
+      },
+      "confirm": {
+        "text": "Bạn có chắc muốn lưu lại các tác vụ đã chọn?"
+      },
+      "add_task": {
+        "title": "Tạo mới tác vụ",
+        "title_update": "Cập nhật tác vụ",
+        "name": "Tên tác vụ",
+        "function": "Hàm",
+        "action": "Hành động",
+        "column": "Cột",
+        "update": "Cập nhật",
+        "new_column": "Tên cột mới",
+        "insert": "Thêm mới",
+        "create": "Tạo",
+        "validation": {
+          "name": {
+            "empty": "Yêu cầu nhập",
+            "not_valid": "Không hợp lệ",
+            "min": "Ít nhất 5 kí tự"
+          },
+          "function": {
+            "empty": "Yêu cầu nhập"
+          },
+          "input_column": {
+            "empty": "Tối thiểu chọn 1"
+          },
+          "new_column": {
+            "empty": "Yêu cầu nhập"
+          }
+        }
+      }
+    },
+    "model": {
+      "title1": "Theo dõi quá trình huấn luyện mô hình",
+      "training_status": "Trạng thái thực thi",
+      "status": {
+        "done": "Hoàn Thành",
+        "running": "Đang thực thi",
+        "fail": "Thất bại"
+      },
+      "title2": "Cấu hình mô hình",
+      "advanced": "Nâng cao",
+      "train": "Áp dụng",
+      "form": {
+        "model": "Mô hình",
+        "item_id": "ID sản phẩm",
+        "user_id": "ID người dùng",
+        "user_interaction": "Tương tác người dùng và sản phẩm",
+        "weight_trending": {
+          "title": "Số lượng sản phẩm thịnh hành trong gợi ý",
+          "explain": "Tăng trọng số sẽ làm tăng khả năng các sản phẩm thịnh hành được gợi ý",
+          "title2": "Mức độ chính xác hay đa dạng",
+          "explain2": "Tăng trọng số sẽ làm tăng độ đa dạng, giảm độ chính xác của các gợi ý. Giảm trọng số sẽ làm tăng độ chính xác, giảm độ đa dạng",
+          "highly_accurate": "Rất chính xác",
+          "accurate": "Chính xác",
+          "balance": "Cân bằng",
+          "diverse": "Đa dạng",
+          "highly_diversed": "Rất đa dạng"
+        },
+        "params": {
+          "very_low": "Rất thấp",
+          "low": "Thấp",
+          "medium": "Trung bình",
+          "high": "Cao",
+          "very_high": "Rất cao"
+        },
+        "cb": {
+          "title": "Cấu hình chức năng",
+          "explain": "Ít nhất 1 cột phải được cài đặt trọng số",
+          "non_text": "Cột dữ liệu không văn bản",
+          "text": "Cột dữ liệu văn bản",
+          "column": "Cột",
+          "method": "Phương pháp",
+          "weight": "Trọng số"
+        }
+      },
+      "evaluate": {
+        "title": "Đánh giá mô hình (Không bắt buộc)",
+        "form": {
+          "dataset": "Tập dữ liệu kiểm tra",
+          "top": "Số lượng sản phẩm được gợi ý",
+          "evaluate": "Đánh giá"
+        },
+        "evaluate_metric": "Chỉ số đánh giá mô hình",
+        "mean_precision": "Mean Precision",
+        "mean_precision_hover": "True positive/ (True positive + False positive)",
+        "mean_recall": "Mean Recall",
+        "mean_recall_hover": "True positive/ (True positive + False negative)",
+        "at_k": "Mean average precision at k",
+        "at_k_hover": "% accurate item from rank 1 through rank k position as prediction",
+        "coverage": "Coverage",
+        "coverage_hover": "% all item got covered in th result",
+        "novelty": "Novelty",
+        "novelty_hover": "Trending degree of the result"
+      }
+    },
+    "postprocessing": {
+      "confirm": {
+        "text": "Bạn có chắc muốn lưu lại các cài đặt trên?"
+      },
+      "title": "Cài đặt cho mục đích kinh doanh",
+      "number_item": "Số lượng gợi ý",
+      "random": "Sắp xếp kết quả ngẫu nhiên",
+      "priority": "Tạo danh sách gợi ý ưu tiên",
+      "group_by": "Gợi ý theo nhóm sản phẩm",
+      "filter_history": "Lọc theo lịch sử",
+      "dataset": "Bộ dữ liệu",
+      "item_id": "ID sản phẩm",
+      "group_column": "Cột cần nhóm",
+      "column": "Cột",
+      "filter": "Bộ lọc",
+      "value": "Giá trị",
+      "condition": "Điều kiện",
+      "upload_file": "Chọn bộ dữ liệu từ máy tính",
+      "search_id": "ID tìm kiếm",
+      "search_id_placeholder": "Nhập ID cần tìm",
+      "id": "Cột ID",
+      "item_info": "Bộ dữ liệu thông tin sản phẩm (Tủy chọn)",
+      "item_info_placeholder": "Chọn bộ dữ liệu cho thông tin sản phẩm gợi ý",
+      "result": "Kết quả gợi ý"
+    },
+    "dataset": {
+      "title": "Bộ dữ liệu",
+      "title2": "Quản lí bộ dữ liệu",
+      "add_new": "Tạo mới",
+      "search": "Tìm kiếm",
+      "column": {
+        "name": "Tên bộ dữ liệu",
+        "des": "Chú thích",
+        "created_at": "Ngày tạo",
+        "show_column": "Hiển thị cột",
+        "column": "Cột",
+        "active_scenario": "Kịch bản sử dụng",
+        "active_job": "Tác vụ sử dụng",
+        "row": "Số dòng"
+      }
+    },
+    "scenario": {
+      "title": "Kịch bản",
+      "title2": "Quản lí kịch bản",
+      "add_new": "Tạo mới",
+      "search": "Tìm kiếm",
+      "api": "Sử dụng API phía dưới để lấy kết quả được gợi ý cho kịch bản.",
+      "download": "Tải về mẫu kết quả. Bạn có chắc muốn tải?",
+      "column": {
+        "name": "Tên kịch bản",
+        "dataset": "Bộ dữ liệu",
+        "des": "Chú thích",
+        "model_status": "Trạng thái mô hình",
+        "model": "Mô hình",
+        "status": "Trạng thái",
+        "job": "Tác vụ",
+        "created_at": "Ngày tạo",
+        "show_column": "Hiển thị cột",
+        "done": "Hoàn tất",
+        "undone": "Chưa hoàn tất"
+      }
+    },
+    "job": {
+      "title": "Tác vụ",
+      "title2": "Quản lí tác vụ",
+      "add_new": "Tạo mới",
+      "job_detail": "Thông tin tác vụ",
+      "search": "Tìm kiếm",
+      "column": {
+        "name": "Tên tác vụ",
+        "scenario": "Tên kịch bản",
+        "crontab": "Crontab",
+        "schedule": "Thời điểm thực thi",
+        "status": "Tình trạng",
+        "dataset": "Bộ dữ liệu",
+        "running": "Đang thực thi",
+        "not_run": "Chưa thực thi",
+        "hour": "Giờ",
+        "day_month": "Ngày của tháng",
+        "month": "Tháng",
+        "day_week": "Ngày của tuần",
+        "success": "Thành công",
+        "in_progress": "Đang thực thi"
+      },
+      "job_logger": "Quá trình thực thi",
+      "fail": "Thất bại",
+      "success": "Thành công",
+      "stop_text": "Tác vụ đang thực thi. Bạn có chắc muốn dừng lại?",
+      "run_text": "Bạn có chắc muốn thực thi tác vụ này?"
+    },
+    "dashboard": {
+      "title": "Bảng điểu khiển",
+      "overview": "Tổng quan",
+      "dataset": "Thông tin bộ dữ liệu",
+      "scenario": "Thông tin kịch bản",
+      "job": "Thông tin tác vụ",
+      "datasource": "Nguồn dữ liệu",
+      "active_dataset": "Bộ dữ liệu sử dụng",
+      "active_scenario": "Kịch bản sử dụng",
+      "running_job": "Tác vụ đang chạy"
+    },
+    "datasource": {
+      "title": "Nguồn dữ liệu",
+      "title2": "Quản lí nguồn dữ liệu",
+      "add_new": "Tạo nguồn dữ liệu mới",
+      "file": "Tệp",
+      "database": "Dữ liệu",
+      "table": "Số bảng",
+      "title_upload": "Tải tệp lên tại đây",
+      "title_upload2": "Yêu cầu định dạng csv",
+      "skip": "Tạo nguồn dữ liệu mới trực tiếp từ tệp này",
+      "drop_file": "Kéo tệp vào đây",
+      "file_review": "Xem trước",
+      "data_preview": "Xem trước",
+      "form": {
+        "database": "Cơ sở dữ liệu",
+        "database_ip": "Địa chỉ IP",
+        "database_port": "Cổng",
+        "database_user": "Cơ sở dữ liệu người dùng",
+        "password": "Mật khẩu truy cập",
+        "database_name": "Tên cơ sở dữ liệu"
+      },
+      "table_config": {
+        "title": "Tạo bảng mới",
+        "title2": "Quản lí bảng",
+        "dataset": "Nguồn dữ liệu",
+        "table": "Bảng",
+        "column": "Cột",
+        "alias": "Tên gợi nhớ",
+        "name": "Tên bảng",
+        "database": "Dữ liệu",
+        "description": "Chú thích",
+        "created_at": "Ngày tạo",
+        "show_column": "Hiển thị cột",
+        "select": "Chọn",
+        "select_all": "Chọn tất cả"
+      },
+      "transformation": {
+        "name": "Tên bộ dữ liệu",
+        "title": "Tạo mới bộ dữ liệu",
+        "select": "Chọn",
+        "table": "Bảng",
+        "join": "Kết hợp",
+        "where": "Điều kiện",
+        "filter": "Bộ lọc",
+        "column": "Cột",
+        "condition": "Điều kiện",
+        "value": "Giá trị",
+        "add_condition": "Thêm điều kiện"
+      }
+    },
+    "profile": {
+      "title": "Thông tin cá nhân",
+      "general": "Tổng quan",
+      "change_password": "Đổi mật khẩu",
+      "full_name": "Tên đầy đủ",
+      "email": "Email",
+      "company": "Công ty",
+      "requirement": "Yêu cầu",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ",
+      "api_key": "Mã API",
+      "current_password": "Mật khẩu hiện tại",
+      "new_password": "Mật khẩu mới",
+      "repeat_password": "Nhập lại mật khẩu mới",
+      "upload_photo": "Tải ảnh lên",
+      "allow": "Cho phép",
+      "max_size": "tối đa"
+    },
+    "homepage": {
+      "button": {
+        "signup": "Đăng ký",
+        "signin": "Đăng nhập",
+        "dashboard": "Bảng điều khiển",
+        "contact": "Liên hệ"
+      },
+      "carousel": {
+        "title": "HỆ THỐNG GỢI Ý TỰ ĐỘNG",
+        "text": "Mang lại trải nghiệm tốt nhất cho khách",
+        "text_b": "hàng của bạn một cách dễ dàng",
+        "text2": "Đơn giản - Dễ sử dụng",
+        "text2_b": "Mang lại hiệu quả cao",
+        "text3": "Tăng tỉ lệ chuyển đổi và",
+        "text3_b": "doanh thu bằng công nghệ mới nhất",
+        "text4": "Giải pháp tiết kiệm và tận dụng ",
+        "text4_b": "tối đa tài nguyên cho doanh nghiệp",
+        "try": "Trải nghiệm 14 ngày",
+        "free": "miễn phí"
+      },
+      "content": {
+        "title": "THUẬT TOÁN NÂNG CAO",
+        "text": "Ứng dụng các mô hình machine learning và  ",
+        "text2": "deep learning tốt nhất giúp mang lại",
+        "text3": "kết quả kinh doanh ngay lập tức",
+        "text_2": "Mô hình gợi ý dựa trên nội dung tương tự",
+        "text_3": "Mô hình gợi ý dựa trên khách hàng tương tự",
+        "text_4": "Mô hình gợi ý sử dụng deep learning",
+        "title2": "NỀN TẢNG DỄ SỬ DỤNG",
+        "text5": "Với thiết kế đơn giản, không code, nền tảng hệ",
+        "text5_b": "thống gợi ý là một giải pháp tiếp cận công nghệ ",
+        "text5_c": "cao dành cho mọi đối tượng sử dụng",
+        "text6": "Thư viện hàm có sẵn phong phú",
+        "text7": "Dễ dàng tích hợp vào hệ thống bán hàng với rest API",
+        "text8": "Luồng cập nhật kết quả real-time ",
+        "title3": "QUI TRÌNH SỬ DỤNG HỆ THỐNG ",
+        "steps": {
+          "step1": "Đăng ký vào ",
+          "step1_b": "hệ thống",
+          "step2": "Yêu cầu tư",
+          "step2_b": "vấn và hỗ trợ",
+          "step3": "Xây dựng hệ ",
+          "step3_b": "thống gợi ý riêng",
+          "step4": "Tích hợp vào hệ ",
+          "step4_b": "thống bán hàng",
+          "step5": "Theo dõi kết quả",
+          "step5_b": "thực tế"
+        },
+        "title4": "BẠN CẦN HỖ TRỢ?",
+        "title_support": "Gửi ngay yêu cầu và câu hỏi của bạn tới chúng tôi để nhận hỗ trợ sớm nhất. "
+      }
+    },
+    "footer": {
+      "navigation": "Điều Hướng",
+      "contact": "Liên hệ",
+      "homepage": "Trang chủ",
+      "about": "Về chúng tôi",
+      "document": "Hướng dẫn sử dụng",
+      "product": "Sản phẩm và kinh doanh",
+      "email": "Email:",
+      "phone": "Phone:",
+      "support": "Hỗ trợ kỷ thuật:"
+    },
+    "header": {
+      "homepage": "Trang chủ",
+      "about": "Về chúng tôi",
+      "document": "Hướng dẫn sử dụng",
+      "contact": "Liên hệ"
+    },
+    "authentication": {
+      "signup": {
+        "create_new_account": "Đăng ký tài khoản",
+        "use_your_email": "Đăng ký tài khoản bằng email của bạn",
+        "name": "Tên",
+        "email": "Địa chỉ email",
+        "password": "Mật khẩu",
+        "btn_signup": "ĐĂNG KÝ NGAY",
+        "have_an_account": "Đã có tài khoản?",
+        "btn_signin": "Đăng nhập",
+        "back": "Trở về",
+        "homepage": "Trang chủ"
+      },
+      "signin": {
+        "header": "Đăng nhập",
+        "description": "Đăng nhập vào nền tảng cục bộ",
+        "email": "Địa chỉ email",
+        "password": "Mật khẩu",
+        "submit": "Đăng nhập ngay",
+        "text1": "Chưa có tài khoản?",
+        "signup": "Đăng ký",
+        "text2": "Trở về",
+        "home": "Trang chủ"
+      }
+    }
+  }
+}
