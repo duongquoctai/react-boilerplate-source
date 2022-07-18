@@ -12,7 +12,7 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 3000,
     open: true,
     compress: true,
