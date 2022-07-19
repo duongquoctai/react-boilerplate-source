@@ -11,7 +11,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import ProcessBar from '~/views/access-permission/components/ProcessBar';
 import PropTypes from 'prop-types';
-import { REQUEST_STATUS, REQUEST_TYPES } from '../constant';
+import { REQUEST_STATUS, REQUEST_TYPE_OPTIONS } from '../constant';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
@@ -96,32 +96,40 @@ function DataTable({ requests = [] }) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{requests.map(req => (
-						<TableRow key={req.ticketId}>
-							<TableCell>{req.ticketId}</TableCell>
-							<TableCell>{req.name}</TableCell>
-							<TableCell>
-								<span className={classes.type}>
-									{REQUEST_TYPES.find(r => r.value === req.type)?.label ||
-										'Unknown'}
-								</span>
-							</TableCell>
-							<TableCell className={classes.owners}>
-								{renderOwners(req.owners, classes)}
-							</TableCell>
-							<TableCell>
-								{moment(req.createTime).format('DD/MM/YYYY')}
-							</TableCell>
-							<TableCell>
-								<ProcessBar process={req.process} />
-							</TableCell>
-							<TableCell>
-								<Box sx={{ color: REQUEST_STATUS[req.status]?.color }}>
-									{REQUEST_STATUS[req.status]?.label}
-								</Box>
+					{requests.length ? (
+						requests.map(req => (
+							<TableRow key={req.ticketId}>
+								<TableCell>{req.ticketId}</TableCell>
+								<TableCell>{req.name}</TableCell>
+								<TableCell>
+									<span className={classes.type}>
+										{REQUEST_TYPE_OPTIONS.find(r => r.value === req.type)
+											?.label || 'Unknown'}
+									</span>
+								</TableCell>
+								<TableCell className={classes.owners}>
+									{renderOwners(req.owners, classes)}
+								</TableCell>
+								<TableCell>
+									{moment(req.createTime).format('DD/MM/YYYY')}
+								</TableCell>
+								<TableCell>
+									<ProcessBar process={req.process} />
+								</TableCell>
+								<TableCell>
+									<Box sx={{ color: REQUEST_STATUS[req.status]?.color }}>
+										{REQUEST_STATUS[req.status]?.label}
+									</Box>
+								</TableCell>
+							</TableRow>
+						))
+					) : (
+						<TableRow>
+							<TableCell colSpan={7} sx={{ textAlign: 'center' }}>
+								No ticket found
 							</TableCell>
 						</TableRow>
-					))}
+					)}
 				</TableBody>
 			</Table>
 		</TableContainer>

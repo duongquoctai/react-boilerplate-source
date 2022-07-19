@@ -13,7 +13,7 @@ const PRIMARY = {
 	// main: '#00AB55',
 	// dark: '#007B55',
 	// darker: '#005249'
-	lighter: '#8DD2FC',
+	lighter: '#D0F2FF',
 	light: '#74CAFF',
 	main: '#1890FF',
 	dark: '#1379d6',

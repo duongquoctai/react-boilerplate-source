@@ -12,8 +12,13 @@ import { makeStyles } from '@mui/styles';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGetOutgoingRequestsQuery } from '~/redux/slices/access-permission';
 import SelectCustom from '../components/Select';
-import { REQUEST_TYPES, CREATE_TIME_OPTIONS, PAGE_LIMIT } from '../constant';
+import {
+	REQUEST_TYPE_OPTIONS,
+	CREATE_TIME_OPTIONS,
+	PAGE_LIMIT,
+} from '../constant';
 import DataTable from './DataTable';
+import RequestModal from './RequestModal';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -48,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 			width: '100%',
 		},
 	},
-	select: {
+	formControl: {
 		borderRadius: 4,
 		minWidth: '160px',
 		height: theme.spacing(4.5),
@@ -64,6 +69,7 @@ function OutgoingRequestView() {
 	const searchRef = useRef('');
 	const [page, setPage] = useState(1);
 	const [totalPage, setTotalPage] = useState(10);
+	const [openRequestModal, setOpenRequestModal] = useState(true);
 	const { isLoading, data: requests } = useGetOutgoingRequestsQuery(
 		page,
 		PAGE_LIMIT,
@@ -75,6 +81,10 @@ function OutgoingRequestView() {
 
 	const handleCreateTimeChange = option => {
 		console.log(option);
+	};
+
+	const handleToggleModal = () => {
+		setOpenRequestModal(!openRequestModal);
 	};
 
 	// Search when press enter
@@ -100,22 +110,24 @@ function OutgoingRequestView() {
 						className={classes.searchField}
 						placeholder='Search requests ...'
 					/>
-					<Box className={classes.select}>
+					<Box className={classes.formControl}>
 						<SelectCustom
 							placeholder='Type'
-							options={REQUEST_TYPES}
-							selectProps={{ className: classes.select }}
-							defaultValue={REQUEST_TYPES[0].value}
+							options={REQUEST_TYPE_OPTIONS}
+							selectProps={{ className: classes.formControl }}
+							defaultValue={REQUEST_TYPE_OPTIONS[0].value}
 							onChange={handleChangeType}
+							formControlClass={classes.formControl}
 						/>
 					</Box>
-					<Box className={classes.select}>
+					<Box className={classes.formControl}>
 						<SelectCustom
 							placeholder='Created'
-							selectProps={{ className: classes.select }}
+							selectProps={{ className: classes.formControl }}
 							options={CREATE_TIME_OPTIONS}
 							defaultValue={CREATE_TIME_OPTIONS[0].value}
 							onChange={handleCreateTimeChange}
+							formControlClass={classes.formControl}
 						/>
 					</Box>
 				</Stack>
@@ -125,6 +137,7 @@ function OutgoingRequestView() {
 					sx={{ height: '100%' }}
 					startIcon={<AddOutlinedIcon fontSize='small' />}
 					className={classes.button}
+					onClick={handleToggleModal}
 				>
 					New Request
 				</Button>
@@ -147,6 +160,8 @@ function OutgoingRequestView() {
 					</Box>
 				</>
 			)}
+
+			<RequestModal open={openRequestModal} onClose={handleToggleModal} />
 		</Container>
 	);
 }

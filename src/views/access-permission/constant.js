@@ -9,7 +9,7 @@ export const REQUEST_STATUS = {
 	},
 };
 
-export const REQUEST_TYPES = [
+export const REQUEST_TYPE_OPTIONS = [
 	{
 		value: 0,
 		label: 'All',
@@ -40,3 +40,14 @@ export const CREATE_TIME_OPTIONS = [
 ];
 
 export const PAGE_LIMIT = 5;
+
+export const REQUEST_PROJECTS = [
+	{
+		label: 'FPT Telecom',
+		value: 0,
+	},
+	{
+		label: 'FPT Software',
+		value: 1,
+	},
+];
