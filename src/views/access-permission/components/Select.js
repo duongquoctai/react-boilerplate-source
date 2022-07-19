@@ -1,5 +1,14 @@
 import React from 'react';
 import { Box, MenuItem, Select } from '@mui/material';
+import PropTypes from 'prop-types';
+
+SelectCustom.propTypes = {
+	placeholder: PropTypes.string,
+	options: PropTypes.array.isRequired,
+	selectProps: PropTypes.object,
+	defaultValue: PropTypes.any,
+	onChange: PropTypes.func,
+};
 
 function SelectCustom({
 	placeholder = '',

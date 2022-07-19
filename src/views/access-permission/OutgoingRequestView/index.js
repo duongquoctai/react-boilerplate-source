@@ -1,12 +1,18 @@
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import { Button, CircularProgress, InputBase, Stack } from '@mui/material';
+import {
+	Button,
+	CircularProgress,
+	InputBase,
+	Pagination,
+	Stack,
+} from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGetOutgoingRequestsQuery } from '~/redux/slices/access-permission';
 import SelectCustom from '../components/Select';
-import { REQUEST_TYPES, CREATE_TIME_OPTIONS } from '../constant';
+import { REQUEST_TYPES, CREATE_TIME_OPTIONS, PAGE_LIMIT } from '../constant';
 import DataTable from './DataTable';
 
 const useStyles = makeStyles(theme => ({
@@ -56,7 +62,12 @@ const useStyles = makeStyles(theme => ({
 function OutgoingRequestView() {
 	const classes = useStyles();
 	const searchRef = useRef('');
-	const { isLoading, data: requests } = useGetOutgoingRequestsQuery();
+	const [page, setPage] = useState(1);
+	const [totalPage, setTotalPage] = useState(10);
+	const { isLoading, data: requests } = useGetOutgoingRequestsQuery(
+		page,
+		PAGE_LIMIT,
+	);
 
 	const handleChangeType = type => {
 		console.log(type);
@@ -124,7 +135,17 @@ function OutgoingRequestView() {
 					<CircularProgress />
 				</Box>
 			) : (
-				<DataTable requests={requests} />
+				<>
+					<DataTable requests={requests} />
+					<Box mt={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+						<Pagination
+							count={totalPage}
+							color='primary'
+							page={page}
+							onChange={(_, p) => setPage(p)}
+						/>
+					</Box>
+				</>
 			)}
 		</Container>
 	);

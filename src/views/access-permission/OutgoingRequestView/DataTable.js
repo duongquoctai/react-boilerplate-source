@@ -6,12 +6,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import ProcessBar from '~/views/access-permission/components/ProcessBar';
 import PropTypes from 'prop-types';
 import { REQUEST_STATUS, REQUEST_TYPES } from '../constant';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const useStyles = makeStyles(theme => ({
 	table: {
@@ -65,6 +67,14 @@ DataTable.propTypes = {
 
 function DataTable({ requests = [] }) {
 	const classes = useStyles();
+	const [sort, setSort] = useState('asc');
+	const SortIcon = sort === 'asc' ? ArrowDownwardIcon : ArrowUpwardIcon;
+
+	const handleSort = () => {
+		if (sort === 'asc') {
+			setSort('desc');
+		} else setSort('asc');
+	};
 
 	return (
 		<TableContainer component={Box} className={classes.table}>
@@ -72,7 +82,12 @@ function DataTable({ requests = [] }) {
 				<TableHead>
 					<TableRow>
 						<TableCell>Ticket ID</TableCell>
-						<TableCell>Name</TableCell>
+						<TableCell>
+							<Stack direction='row' spacing={1}>
+								<span>Name</span>
+								<SortIcon onClick={handleSort} sx={{ cursor: 'pointer' }} />
+							</Stack>
+						</TableCell>
 						<TableCell>Type</TableCell>
 						<TableCell>Data owners</TableCell>
 						<TableCell>Create Time</TableCell>

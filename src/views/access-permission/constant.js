@@ -38,3 +38,5 @@ export const CREATE_TIME_OPTIONS = [
 		value: 1,
 	},
 ];
+
+export const PAGE_LIMIT = 5;
