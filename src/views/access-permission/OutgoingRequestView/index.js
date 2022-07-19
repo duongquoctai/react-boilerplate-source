@@ -1,31 +1,18 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import { Button, CircularProgress, InputBase, Tab, Tabs } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import DataTable from './DataTable';
+import { Button, CircularProgress, InputBase, Stack } from '@mui/material';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import { makeStyles } from '@mui/styles';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGetOutgoingRequestsQuery } from '~/redux/slices/access-permission';
-import { REQUEST_TYPES } from '../constant';
+import SelectCustom from '../components/Select';
+import { REQUEST_TYPES, CREATE_TIME_OPTIONS } from '../constant';
+import DataTable from './DataTable';
 
 const useStyles = makeStyles(theme => ({
 	root: {
 		maxWidth: 1148,
 	},
-	tabs: {
-		borderBottom: `solid 1px ${theme.palette.primary.main}`,
-		letterSpacing: '0.5px',
-	},
-	tab: {
-		fontWeight: 400,
-		padding: `${theme.spacing(0.75)} ${theme.spacing(1.5)}`,
-	},
-	selectedTab: {
-		color: `${theme.palette.primary.contrastText} !important`,
-		fontWeight: 600,
-		backgroundColor: theme.palette.primary.main,
-	},
-
 	searchWrap: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -41,7 +28,6 @@ const useStyles = makeStyles(theme => ({
 		fontSize: '14px',
 		height: theme.spacing(4.5),
 		[theme.breakpoints.down('sm')]: {
-			marginBottom: theme.spacing(1.5),
 			width: '100%',
 		},
 	},
@@ -52,44 +38,76 @@ const useStyles = makeStyles(theme => ({
 		fontSize: '14px',
 		height: theme.spacing(4.5),
 		[theme.breakpoints.down('sm')]: {
+			marginTop: theme.spacing(1.5),
+			width: '100%',
+		},
+	},
+	select: {
+		borderRadius: 4,
+		minWidth: '160px',
+		height: theme.spacing(4.5),
+		fontSize: 14,
+		[theme.breakpoints.down('md')]: {
 			width: '100%',
 		},
 	},
 }));
 
 function OutgoingRequestView() {
-	const [type, setType] = useState(REQUEST_TYPES[0].value);
 	const classes = useStyles();
+	const searchRef = useRef('');
 	const { isLoading, data: requests } = useGetOutgoingRequestsQuery();
 
-	const handleTabChange = (_, requestType) => {
-		setType(requestType);
+	const handleChangeType = type => {
+		console.log(type);
 	};
+
+	const handleCreateTimeChange = option => {
+		console.log(option);
+	};
+
+	// Search when press enter
+	useEffect(() => {
+		searchRef.current?.addEventListener('keydown', function(e) {
+			if (e.code === 'Enter') {
+				console.log(e.target.value.trim());
+			}
+		});
+		return () => searchRef.current?.removeEventListener('keydown', () => {});
+	}, []);
 
 	return (
 		<Container className={classes.root}>
-			<Box className={classes.tabs}>
-				<Tabs
-					value={type}
-					onChange={handleTabChange}
-					TabIndicatorProps={{ style: { display: 'none' } }}
-				>
-					{REQUEST_TYPES.map(requestType => (
-						<Tab
-							classes={{ root: classes.tab, selected: classes.selectedTab }}
-							key={requestType.value}
-							label={requestType.label}
-							value={requestType.value}
-						/>
-					))}
-				</Tabs>
-			</Box>
-
 			<Box className={classes.searchWrap}>
-				<InputBase
-					className={classes.searchField}
-					placeholder='Search requests ...'
-				/>
+				<Stack
+					direction={{ xs: 'column', md: 'row' }}
+					alignItems='center'
+					spacing={2}
+				>
+					<InputBase
+						inputProps={{ ref: searchRef }}
+						className={classes.searchField}
+						placeholder='Search requests ...'
+					/>
+					<Box className={classes.select}>
+						<SelectCustom
+							placeholder='Type'
+							options={REQUEST_TYPES}
+							selectProps={{ className: classes.select }}
+							defaultValue={REQUEST_TYPES[0].value}
+							onChange={handleChangeType}
+						/>
+					</Box>
+					<Box className={classes.select}>
+						<SelectCustom
+							placeholder='Created'
+							selectProps={{ className: classes.select }}
+							options={CREATE_TIME_OPTIONS}
+							defaultValue={CREATE_TIME_OPTIONS[0].value}
+							onChange={handleCreateTimeChange}
+						/>
+					</Box>
+				</Stack>
 
 				<Button
 					variant='contained'

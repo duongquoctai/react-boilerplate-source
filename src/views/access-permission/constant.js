@@ -27,3 +27,14 @@ export const REQUEST_TYPES = [
 		label: 'Tools',
 	},
 ];
+
+export const CREATE_TIME_OPTIONS = [
+	{
+		label: 'Anytime',
+		value: 0,
+	},
+	{
+		label: '3 months ago',
+		value: 1,
+	},
+];
