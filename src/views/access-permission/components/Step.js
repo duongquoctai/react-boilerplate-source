@@ -34,13 +34,14 @@ Step.propTypes = {
 	active: PropTypes.bool,
 	done: PropTypes.bool,
 	title: PropTypes.string.isRequired,
+	onClick: PropTypes.func,
 };
 
-function Step({ active, done, title }) {
+function Step({ active, done, title, onClick = () => {} }) {
 	const classes = useStyles({ active, done });
 
 	return (
-		<Stack spacing={1}>
+		<Stack spacing={1} sx={{ cursor: 'pointer' }} onClick={onClick}>
 			<Box className={classes.top}>
 				{done && <CheckCircleIcon className={classes.checkIcon} />}
 				<span className={classes.title}>{title}</span>

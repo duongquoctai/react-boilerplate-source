@@ -51,3 +51,14 @@ export const REQUEST_PROJECTS = [
 		value: 1,
 	},
 ];
+
+export const REQUEST_DURATION = [
+	{
+		label: 'Forever',
+		value: 0,
+	},
+	{
+		label: '1 week',
+		value: 1,
+	},
+];

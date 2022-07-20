@@ -42,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 		lineHeight: '20px',
 	},
 	owners: {
+		minWidth: '200px',
 		maxWidth: '200px',
 		wordBreak: 'break-word',
 	},
@@ -62,7 +63,7 @@ function renderOwners(owners = [], classes) {
 }
 
 DataTable.propTypes = {
-	requests: PropTypes.array.isRequired,
+	requests: PropTypes.array,
 };
 
 function DataTable({ requests = [] }) {
