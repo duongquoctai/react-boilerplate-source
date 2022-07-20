@@ -10,6 +10,7 @@ SelectCustom.propTypes = {
 	selectProps: PropTypes.object,
 	defaultValue: PropTypes.any,
 	onChange: PropTypes.func,
+	showPlaceholderInValue: PropTypes.bool,
 };
 
 const useStyles = makeStyles(theme => ({
@@ -20,36 +21,65 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+function renderSelectValue(
+	options,
+	selected,
+	placeholder,
+	showPlaceholderInValue,
+) {
+	const Placeholder = (
+		<Box
+			component='span'
+			sx={{ color: 'grey.500', fontWeight: 400, fontSize: '14px' }}
+			mr={1}
+		>
+			{placeholder}
+		</Box>
+	);
+
+	if ((!selected || !selected.length === 0) && placeholder) {
+		return Placeholder;
+	}
+
+	return (
+		<>
+			{placeholder && showPlaceholderInValue && Placeholder}
+			<span>{options.find(o => o.value === selected)?.label}</span>
+		</>
+	);
+}
+
 function SelectCustom({
 	placeholder = '',
 	options = [],
 	selectProps = {},
-	defaultValue = null,
+	defaultValue = '',
 	onChange = () => {},
 	formControlClass = '',
+	showPlaceholderInValue = true,
 }) {
 	const classes = useStyles();
+
 	return (
 		<FormControl className={`${classes.formControl} ${formControlClass}`}>
 			<Select
+				displayEmpty
 				defaultValue={defaultValue}
 				onChange={e => onChange(e.target.value)}
-				renderValue={selected => (
-					<>
-						{placeholder && (
-							<Box
-								component='span'
-								sx={{ color: 'grey.500', fontWeight: 400 }}
-								mr={1}
-							>
-								{placeholder}
-							</Box>
-						)}
-						<span>{options.find(o => o.value === selected)?.label}</span>
-					</>
-				)}
+				renderValue={selected =>
+					renderSelectValue(
+						options,
+						selected,
+						placeholder,
+						showPlaceholderInValue,
+					)
+				}
 				{...selectProps}
 			>
+				<MenuItem disabled value=''>
+					{placeholder}
+				</MenuItem>
+
 				{options.map(option => (
 					<MenuItem key={option.value} value={option.value}>
 						{option.label}

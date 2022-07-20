@@ -115,7 +115,6 @@ function OutgoingRequestView() {
 							placeholder='Type'
 							options={REQUEST_TYPE_OPTIONS}
 							selectProps={{ className: classes.formControl }}
-							defaultValue={REQUEST_TYPE_OPTIONS[0].value}
 							onChange={handleChangeType}
 							formControlClass={classes.formControl}
 						/>
@@ -125,7 +124,6 @@ function OutgoingRequestView() {
 							placeholder='Created'
 							selectProps={{ className: classes.formControl }}
 							options={CREATE_TIME_OPTIONS}
-							defaultValue={CREATE_TIME_OPTIONS[0].value}
 							onChange={handleCreateTimeChange}
 							formControlClass={classes.formControl}
 						/>

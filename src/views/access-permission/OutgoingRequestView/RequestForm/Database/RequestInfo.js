@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		minWidth: '100%',
 		maxWidth: '100%',
+		maxHeight: '250px',
 		borderRadius: 6,
 		border: `solid 1px ${theme.palette.primary.light}`,
 		padding: '6px 12px',

@@ -1,15 +1,17 @@
 import { Box, Button, Grid } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import Step from '~/views/access-permission/components/Step';
-import RequestData from './RequestData';
 import RequestInfo from './RequestInfo';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@mui/styles';
+import RequestProtocol from './RequestProtocol';
+import RequestData from './RequestData';
 
 const STEPS = [
 	{ key: 'info', title: '1. Request Info' },
 	{ key: 'data', title: '2. Request Data' },
+	{ key: 'protocol', title: '3. Request Protocol' },
 ];
 
 const gridRows = ~~(12 / STEPS.length);
@@ -29,6 +31,8 @@ const initialForm = {
 		duration: -1,
 		desc: '',
 	},
+	data: [], // [{ id, ownerId, tag, columns: [] }]
+	protocol: {},
 };
 
 const yupSchemas = {
@@ -48,10 +52,22 @@ const yupSchemas = {
 			.typeError('Descriptions a required field')
 			.required('Description is a required field'),
 	}),
+	data: yup
+		.array()
+		.required()
+		.of(
+			yup.object().shape({
+				id: yup.string().required(),
+				ownerId: yup.string().required(),
+				tag: yup.string().required(),
+				columns: yup.array().required(),
+			}),
+		),
+	protocol: yup.object().shape({}),
 };
 
 function DatabaseSteps() {
-	const [currentStep, setCurrentStep] = useState(0);
+	const [currentStep, setCurrentStep] = useState(1);
 	const [isValidStep, setIsValidStep] = useState(false);
 	const form = useRef(initialForm);
 	const classes = useStyles({ isValidStep });
@@ -115,6 +131,22 @@ function DatabaseSteps() {
 		}
 	};
 
+	const handleOwnerDataChange = row => {
+		const index = form.current.data.findIndex(d => d.id === row.id);
+		if (index === -1) {
+			form.current.data.push(row);
+		} else {
+			form.current.data[index] = { ...row };
+		}
+		validateStep('data');
+	};
+
+	const handleOwnerDataDelete = id => {
+		const newData = form.current.data.filter(d => d.id !== id);
+		form.current.data = newData;
+		validateStep('data');
+	};
+
 	useEffect(() => {
 		const stepKey = STEPS[currentStep].key;
 		validateStep(stepKey);
@@ -122,7 +154,7 @@ function DatabaseSteps() {
 
 	return (
 		<Box>
-			<Grid container spacing={2}>
+			<Grid container spacing={1}>
 				{STEPS.map((step, index) => (
 					<Grid item xs={12} sm={gridRows} key={step.key}>
 						<Step
@@ -142,7 +174,13 @@ function DatabaseSteps() {
 						defaultValue={form.current.info}
 					/>
 				)}
-				{currentStep === 1 && <RequestData />}
+				{currentStep === 1 && (
+					<RequestData
+						onChange={handleOwnerDataChange}
+						onDelete={handleOwnerDataDelete}
+					/>
+				)}
+				{currentStep === 2 && <RequestProtocol />}
 			</Box>
 
 			<Box mt={3} pt={3} textAlign='right'>
