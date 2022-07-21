@@ -32,6 +32,7 @@ function RequestData({
 					onDelete={handleDelete}
 					onChange={onChange}
 					defaultValue={row}
+					allowDelete={rows.length > 1}
 				/>
 			))}
 		</Stack>

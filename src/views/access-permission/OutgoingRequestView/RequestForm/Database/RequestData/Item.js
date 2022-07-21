@@ -51,6 +51,7 @@ function RequestDataItem({
 	onDelete = () => {},
 	onChange = () => {},
 	defaultValue = {},
+	allowDelete = true,
 }) {
 	const classes = useStyles();
 	const [form, setForm] = useState(defaultValue);
@@ -147,10 +148,12 @@ function RequestDataItem({
 							className={`${classes.icon} ${classes.addIcon}`}
 							onClick={onAddRow}
 						/>
-						<DeleteForeverIcon
-							className={`${classes.icon} ${classes.deleteIcon}`}
-							onClick={() => onDelete(id)}
-						/>
+						{allowDelete && (
+							<DeleteForeverIcon
+								className={`${classes.icon} ${classes.deleteIcon}`}
+								onClick={() => onDelete(id)}
+							/>
+						)}
 					</Stack>
 				</Grid>
 			</Grid>

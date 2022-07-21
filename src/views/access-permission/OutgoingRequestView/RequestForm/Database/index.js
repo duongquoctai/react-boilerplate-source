@@ -17,12 +17,12 @@ const STEPS = [
 const gridRows = ~~(12 / STEPS.length);
 
 const useStyles = makeStyles(theme => ({
-	continueBtn: props => ({
+	continueBtn: {
 		boxShadow: 'none',
 		borderRadius: 0,
 		fontWeight: 400,
 		padding: '6px 12px',
-	}),
+	},
 }));
 
 const initialForm = {
@@ -31,8 +31,11 @@ const initialForm = {
 		duration: -1,
 		desc: '',
 	},
-	data: [{ id: Date.now().toString(), ownerId: '', tag: '', columns: [] }], // [{ id, ownerId, tag, columns: [] }]
-	protocol: {},
+	data: [{ id: Date.now().toString(), ownerId: '', tag: '', columns: [] }],
+	protocol: {
+		type: '',
+		data: {},
+	},
 };
 
 const yupSchemas = {
@@ -63,7 +66,10 @@ const yupSchemas = {
 				columns: yup.array().required(),
 			}),
 		),
-	protocol: yup.object().shape({}),
+	protocol: yup.object().shape({
+		type: yup.number().required(),
+		data: yup.object().required(),
+	}),
 };
 
 function DatabaseSteps() {
@@ -87,10 +93,6 @@ function DatabaseSteps() {
 	};
 
 	const handleNextStep = () => {
-		if (currentStep === 2) {
-			console.log(form.current);
-			return;
-		}
 		if (currentStep === STEPS.length - 1 || !isValidStep) return;
 
 		const stepKey = STEPS[currentStep].key;
@@ -151,6 +153,15 @@ function DatabaseSteps() {
 		validateStep('data');
 	};
 
+	const handleProtocolChange = (valid, formValue) => {
+		setIsValidStep(valid);
+		form.current.protocol = formValue;
+	};
+
+	const handleSendRequest = () => {
+		console.log(form.current);
+	};
+
 	useEffect(() => {
 		const stepKey = STEPS[currentStep].key;
 		validateStep(stepKey);
@@ -185,7 +196,12 @@ function DatabaseSteps() {
 						defaultValue={form.current.data}
 					/>
 				)}
-				{currentStep === 2 && <RequestProtocol />}
+				{currentStep === 2 && (
+					<RequestProtocol
+						onChange={handleProtocolChange}
+						defaultValue={form.current.protocol}
+					/>
+				)}
 			</Box>
 
 			<Box mt={3} pt={3} textAlign='right'>
@@ -194,20 +210,38 @@ function DatabaseSteps() {
 						Back
 					</Button>
 				)}
-				<Button
-					variant='contained'
-					className={classes.continueBtn}
-					onClick={handleNextStep}
-					sx={{
-						backgroundColor: isValidStep
-							? 'primary.main'
-							: 'rgba(0,0,0,0.38) !important',
-						cursor: isValidStep ? 'pointer' : 'default',
-						pointerEvents: isValidStep ? '' : 'none',
-					}}
-				>
-					Continue
-				</Button>
+				{currentStep < STEPS.length - 1 && (
+					<Button
+						variant='contained'
+						className={classes.continueBtn}
+						onClick={handleNextStep}
+						sx={{
+							backgroundColor: isValidStep
+								? 'primary.main'
+								: 'rgba(0,0,0,0.38) !important',
+							cursor: isValidStep ? 'pointer' : 'default',
+							pointerEvents: isValidStep ? '' : 'none',
+						}}
+					>
+						Continue
+					</Button>
+				)}
+				{currentStep === STEPS.length - 1 && (
+					<Button
+						variant='contained'
+						className={classes.continueBtn}
+						onClick={handleSendRequest}
+						sx={{
+							backgroundColor: isValidStep
+								? 'primary.main'
+								: 'rgba(0,0,0,0.38) !important',
+							cursor: isValidStep ? 'pointer' : 'default',
+							pointerEvents: isValidStep ? '' : 'none',
+						}}
+					>
+						Send
+					</Button>
+				)}
 			</Box>
 		</Box>
 	);
