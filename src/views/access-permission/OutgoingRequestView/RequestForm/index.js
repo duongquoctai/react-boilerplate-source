@@ -1,10 +1,10 @@
 import React from 'react';
 import DatabaseSteps from './Database';
 
-function RequestForm() {
+function RequestForm({ onSendSuccess }) {
 	return (
 		<div>
-			<DatabaseSteps />
+			<DatabaseSteps onSendSuccess={onSendSuccess} />
 		</div>
 	);
 }

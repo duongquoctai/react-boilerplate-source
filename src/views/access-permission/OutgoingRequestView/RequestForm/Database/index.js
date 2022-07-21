@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { makeStyles } from '@mui/styles';
 import RequestProtocol from './RequestProtocol';
 import RequestData from './RequestData';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const STEPS = [
 	{ key: 'info', title: '1. Request Info' },
@@ -72,10 +73,11 @@ const yupSchemas = {
 	}),
 };
 
-function DatabaseSteps() {
+function DatabaseSteps({ onSendSuccess }) {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [isValidStep, setIsValidStep] = useState(false);
-	const form = useRef(initialForm);
+	const [sending, setSending] = useState(false);
+	const form = useRef(JSON.parse(JSON.stringify(initialForm)));
 	const classes = useStyles({ isValidStep });
 
 	const validateStep = stepKey => {
@@ -160,6 +162,14 @@ function DatabaseSteps() {
 
 	const handleSendRequest = () => {
 		console.log(form.current);
+		setSending(true);
+		setTimeout(() => {
+			form.current = JSON.parse(JSON.stringify(initialForm));
+			onSendSuccess && onSendSuccess();
+			setCurrentStep(0);
+			setIsValidStep(false);
+			setSending(false);
+		}, 3000);
 	};
 
 	useEffect(() => {
@@ -231,6 +241,7 @@ function DatabaseSteps() {
 						variant='contained'
 						className={classes.continueBtn}
 						onClick={handleSendRequest}
+						disabled={sending}
 						sx={{
 							backgroundColor: isValidStep
 								? 'primary.main'
@@ -239,7 +250,10 @@ function DatabaseSteps() {
 							pointerEvents: isValidStep ? '' : 'none',
 						}}
 					>
-						Send
+						<span>Send</span>
+						{sending && (
+							<CircularProgress size={16} sx={{ ml: 1 }} color='info' />
+						)}
 					</Button>
 				)}
 			</Box>

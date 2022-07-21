@@ -7,6 +7,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import RequestForm from './RequestForm';
+import CloseIcon from '@mui/icons-material/Close';
+import { toast } from 'react-toastify';
 
 const REQUEST_TYPES = ['Database', 'File System', 'Tools'];
 
@@ -58,12 +60,23 @@ function RequestModal({ open = false, onClose = () => {} }) {
 	const classes = useStyles();
 	const [requestType, setRequestType] = useState(REQUEST_TYPES[0]);
 
+	const handleSendSuccess = () => {
+		toast.success('Send request successfully');
+		onClose();
+	};
+
 	return (
 		<Dialog open={open} onClose={onClose} className={classes.root}>
 			<DialogTitle>
 				<Box className={classes.title}>
 					<span className='main'>Create new Outgoing request</span>
-					<span className='role'>Internal</span>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<span className='role'>Internal</span>
+						<CloseIcon
+							sx={{ cursor: 'pointer', ml: 1, color: 'grey.500' }}
+							onClick={onClose}
+						/>
+					</Box>
 				</Box>
 			</DialogTitle>
 			<DialogContent>
@@ -83,9 +96,10 @@ function RequestModal({ open = false, onClose = () => {} }) {
 						))}
 					</ButtonGroup>
 				</Stack>
-				<RequestForm />
+				<RequestForm onSendSuccess={handleSendSuccess} />
 			</DialogContent>
 		</Dialog>
 	);
 }
+
 export default RequestModal;

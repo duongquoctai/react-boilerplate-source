@@ -69,8 +69,8 @@ function ApiForm({ onChange, defaultValue = {} }) {
 	});
 
 	const handleChange = (field, value) => {
+		form.current[field] = value;
 		timeout = debounce(timeout, 250, () => {
-			form.current[field] = value;
 			schema.isValid(form.current).then(valid => {
 				onChange(valid, form.current);
 			});
