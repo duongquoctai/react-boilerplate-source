@@ -31,7 +31,7 @@ const initialForm = {
 		duration: -1,
 		desc: '',
 	},
-	data: [], // [{ id, ownerId, tag, columns: [] }]
+	data: [{ id: Date.now().toString(), ownerId: '', tag: '', columns: [] }], // [{ id, ownerId, tag, columns: [] }]
 	protocol: {},
 };
 
@@ -67,7 +67,7 @@ const yupSchemas = {
 };
 
 function DatabaseSteps() {
-	const [currentStep, setCurrentStep] = useState(1);
+	const [currentStep, setCurrentStep] = useState(0);
 	const [isValidStep, setIsValidStep] = useState(false);
 	const form = useRef(initialForm);
 	const classes = useStyles({ isValidStep });
@@ -87,6 +87,10 @@ function DatabaseSteps() {
 	};
 
 	const handleNextStep = () => {
+		if (currentStep === 2) {
+			console.log(form.current);
+			return;
+		}
 		if (currentStep === STEPS.length - 1 || !isValidStep) return;
 
 		const stepKey = STEPS[currentStep].key;
@@ -178,6 +182,7 @@ function DatabaseSteps() {
 					<RequestData
 						onChange={handleOwnerDataChange}
 						onDelete={handleOwnerDataDelete}
+						defaultValue={form.current.data}
 					/>
 				)}
 				{currentStep === 2 && <RequestProtocol />}

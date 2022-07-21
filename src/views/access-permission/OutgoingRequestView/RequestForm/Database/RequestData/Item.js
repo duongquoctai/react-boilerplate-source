@@ -50,9 +50,10 @@ function RequestDataItem({
 	onAddRow = () => {},
 	onDelete = () => {},
 	onChange = () => {},
+	defaultValue = {},
 }) {
 	const classes = useStyles();
-	const [form, setForm] = useState({ ownerId: '', tag: '', columns: [] });
+	const [form, setForm] = useState(defaultValue);
 
 	const tagOptions =
 		DATA_OWNERS.find(o => o.value === form.ownerId)?.tags || [];
@@ -74,6 +75,7 @@ function RequestDataItem({
 
 	const handleColumnChange = columns => {
 		const newForm = { ...form, columns };
+		setForm(newForm);
 		onChange({ id, ...newForm });
 	};
 
@@ -111,6 +113,7 @@ function RequestDataItem({
 								formControlClass={`${classes.select} ${
 									!form.ownerId ? 'disabled' : ''
 								}`}
+								defaultValue={defaultValue.tag}
 								onChange={handleTagChange}
 							/>
 						</Grid>
@@ -122,7 +125,11 @@ function RequestDataItem({
 								formControlClass={`${classes.select} ${
 									!form.tag ? 'disabled' : ''
 								}`}
-								selectProps={{ size: 'small', className: classes.select }}
+								selectProps={{
+									size: 'small',
+									className: classes.select,
+									value: form.columns,
+								}}
 								onChange={handleColumnChange}
 							/>
 						</Grid>

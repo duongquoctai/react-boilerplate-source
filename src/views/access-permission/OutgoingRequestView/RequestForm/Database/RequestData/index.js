@@ -1,16 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 import RequestDataItem from './Item';
 
-const initItems = [{ id: Date.now().toString() }];
-
-function RequestData({ onChange = () => {}, onDelete = () => {} }) {
-	const [rows, setRows] = useState(initItems);
-	const rowRef = useRef(initItems);
+function RequestData({
+	onChange = () => {},
+	onDelete = () => {},
+	defaultValue = [],
+}) {
+	const [rows, setRows] = useState(defaultValue);
 
 	const handleAddRow = () => {
 		const id = Date.now().toString();
-		setRows([...rows, { id }]);
+		setRows([...rows, { id, ownerId: '', tag: '', columns: [] }]);
 	};
 
 	const handleDelete = id => {
@@ -30,6 +31,7 @@ function RequestData({ onChange = () => {}, onDelete = () => {} }) {
 					onAddRow={handleAddRow}
 					onDelete={handleDelete}
 					onChange={onChange}
+					defaultValue={row}
 				/>
 			))}
 		</Stack>

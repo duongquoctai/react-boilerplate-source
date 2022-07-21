@@ -149,7 +149,7 @@ function MultipleSelect({
 					/>
 				</MenuItem>
 				{options.map(option => (
-					<MenuItem key={option.value} value={option.value}>
+					<MenuItem key={option.value} value={option.value} sx={{ ml: 2 }}>
 						<ListItemIcon>
 							<Checkbox checked={selected.indexOf(option.value) > -1} />
 						</ListItemIcon>
