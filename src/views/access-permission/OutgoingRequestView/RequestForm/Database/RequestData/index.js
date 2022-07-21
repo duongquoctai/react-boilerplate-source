@@ -23,7 +23,7 @@ function RequestData({
 	};
 
 	return (
-		<Stack spacing={2} sx={{ maxHeight: '500px', overflow: 'auto' }}>
+		<Stack spacing={2}>
 			{rows.map(row => (
 				<RequestDataItem
 					key={row.id}

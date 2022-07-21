@@ -18,6 +18,11 @@ const STEPS = [
 const gridRows = ~~(12 / STEPS.length);
 
 const useStyles = makeStyles(theme => ({
+	root: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
 	continueBtn: {
 		boxShadow: 'none',
 		borderRadius: 0,
@@ -178,7 +183,7 @@ function DatabaseSteps({ onSendSuccess }) {
 	}, [currentStep]);
 
 	return (
-		<Box>
+		<Box className={classes.root}>
 			<Grid container spacing={1}>
 				{STEPS.map((step, index) => (
 					<Grid item xs={12} sm={gridRows} key={step.key}>
@@ -192,7 +197,7 @@ function DatabaseSteps({ onSendSuccess }) {
 				))}
 			</Grid>
 
-			<Box mt={3}>
+			<Box mt={3} sx={{ flexGrow: 1 }}>
 				{currentStep === 0 && (
 					<RequestInfo
 						onChange={(field, value) => handleFormChange('info', field, value)}
@@ -214,7 +219,7 @@ function DatabaseSteps({ onSendSuccess }) {
 				)}
 			</Box>
 
-			<Box mt={3} pt={3} textAlign='right'>
+			<Box mt='auto' pt={3} textAlign='right'>
 				{currentStep > 0 && (
 					<Button sx={{ fontWeight: 400, mr: 1 }} onClick={handlePreviousStep}>
 						Back

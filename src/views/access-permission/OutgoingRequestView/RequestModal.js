@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
 			width: '1020px',
 			maxWidth: '1020px',
 		},
+		'& .MuiDialogContent-root': {
+			display: 'flex',
+			flexDirection: 'column',
+		},
 	},
 	title: {
 		display: 'flex',
@@ -90,13 +94,16 @@ function RequestModal({ open = false, onClose = () => {} }) {
 								className={`${classes.typeButton} ${
 									type === requestType ? 'active' : ''
 								}`}
+								onClick={() => setRequestType(type)}
 							>
 								{type}
 							</Button>
 						))}
 					</ButtonGroup>
 				</Stack>
-				<RequestForm onSendSuccess={handleSendSuccess} />
+				<Box sx={{ flexGrow: 1 }}>
+					<RequestForm onSendSuccess={handleSendSuccess} type={requestType} />
+				</Box>
 			</DialogContent>
 		</Dialog>
 	);

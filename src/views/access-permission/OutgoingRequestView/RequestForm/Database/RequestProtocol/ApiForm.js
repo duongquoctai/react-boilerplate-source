@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { commonStyles } from '.';
@@ -6,8 +6,10 @@ import SelectCustom from '~/views/access-permission/components/Select';
 import { REQUEST_FREQUENCIES } from '~/views/access-permission/constant';
 import * as yup from 'yup';
 import { debounce } from '~/views/access-permission/helper';
+import { toast } from 'react-toastify';
 
 let timeout = null;
+const MAX_NUM_OF_ROWS = 1_000_000;
 
 const useStyles = makeStyles(theme => ({
 	...commonStyles(theme),
@@ -47,19 +49,47 @@ const useStyles = makeStyles(theme => ({
 		fontSize: '14px',
 		color: 'rgba(0, 0, 0, 0.87)',
 	},
+	error: {
+		fontSize: '14px',
+		color: theme.palette.error.main,
+		marginTop: '10px',
+		paddingLeft: '2px',
+	},
 }));
 
 const schema = yup.object().shape({
 	frequency: yup.number().required(),
-	numOfRows: yup.number().required(),
-	serverIP: yup.string().matches(/^(\d|\.)+$/),
+	numOfRows: yup
+		.number()
+		.required()
+		.min(0, `The maximum number of rows is 0`)
+		.max(MAX_NUM_OF_ROWS, `The maximum number of rows is ${MAX_NUM_OF_ROWS}`),
+	serverIP: yup
+		.string()
+		.matches(
+			/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
+			'Invalid Server IP',
+		),
 	host: yup.string().required(),
-	port: yup.number().required(),
-	dbName: yup.string().required(),
+	port: yup
+		.string('Invalid port')
+		.required('Port is required')
+		.matches(
+			/^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/,
+			'Invalid port',
+		),
+	dbName: yup
+		.string()
+		.required()
+		.matches(
+			/^(\d|\_|\-\[a-z]|[A-Z])+$/,
+			'The database name consists of characters a-zA-Z[0-9]_-',
+		),
 });
 
 function ApiForm({ onChange, defaultValue = {} }) {
 	const classes = useStyles();
+	const [error, setError] = useState('');
 	const form = useRef({
 		frequency: '',
 		numOfRows: '',
@@ -71,9 +101,28 @@ function ApiForm({ onChange, defaultValue = {} }) {
 	const handleChange = (field, value) => {
 		form.current[field] = value;
 		timeout = debounce(timeout, 250, () => {
-			schema.isValid(form.current).then(valid => {
-				onChange(valid, form.current);
-			});
+			// show error if exist & fulfill
+			let isFulfill = true;
+			for (let k in form.current) {
+				if (!form.current[k]) isFulfill = false;
+			}
+
+			if (isFulfill) {
+				schema
+					.validate(form.current)
+					.then(() => {
+						setError('');
+						onChange(true, form.current);
+					})
+					.catch(err => {
+						setError(err.message);
+						onChange(false, form.current);
+					});
+			} else {
+				schema
+					.isValid(form.current)
+					.then(valid => onChange(valid, form.current));
+			}
 		});
 	};
 
@@ -144,6 +193,7 @@ function ApiForm({ onChange, defaultValue = {} }) {
 					/>
 				</Grid>
 			</Grid>
+			{error && <Typography className={classes.error}>{error}</Typography>}
 		</Box>
 	);
 }

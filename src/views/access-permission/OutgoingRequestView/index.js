@@ -69,7 +69,7 @@ function OutgoingRequestView() {
 	const searchRef = useRef('');
 	const [page, setPage] = useState(1);
 	const [totalPage, setTotalPage] = useState(10);
-	const [openRequestModal, setOpenRequestModal] = useState(true);
+	const [openRequestModal, setOpenRequestModal] = useState(false);
 	const { isLoading, data: requests } = useGetOutgoingRequestsQuery(
 		page,
 		PAGE_LIMIT,

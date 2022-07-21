@@ -1,9 +1,9 @@
 export const REQUEST_STATUS = {
-	1: {
+	0: {
 		color: '#FF7000',
 		label: 'In Process',
 	},
-	2: {
+	1: {
 		color: '#00A266',
 		label: 'Success',
 	},

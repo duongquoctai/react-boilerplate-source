@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, FormControl, MenuItem, Select } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
@@ -59,13 +59,17 @@ function SelectCustom({
 	showPlaceholderInValue = true,
 }) {
 	const classes = useStyles();
+	const [value, setValue] = useState(defaultValue);
 
 	return (
 		<FormControl className={`${classes.formControl} ${formControlClass}`}>
 			<Select
 				displayEmpty
-				defaultValue={defaultValue}
-				onChange={e => onChange(e.target.value)}
+				value={value}
+				onChange={e => {
+					setValue(e.target.value);
+					onChange(e.target.value);
+				}}
 				renderValue={selected =>
 					renderSelectValue(
 						options,

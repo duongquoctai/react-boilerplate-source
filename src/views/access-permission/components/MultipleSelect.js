@@ -43,9 +43,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function renderSelectValue(options = [], selected = [], placeholder, classes) {
-	const MAX_DISPLAY_ITEMS = 1;
+	const selectedLen = selected.length;
 
-	if (selected.length === 0) {
+	if (selectedLen === 0) {
 		return (
 			<Box
 				component='span'
@@ -56,30 +56,8 @@ function renderSelectValue(options = [], selected = [], placeholder, classes) {
 		);
 	}
 
-	if (selected.length === options.length) {
-		return <span className={classes.selectedOption}>All (*)</span>;
-	}
-
-	if (selected.length > MAX_DISPLAY_ITEMS) {
-		return (
-			<>
-				{selected.slice(0, MAX_DISPLAY_ITEMS).map(option => (
-					<span className={classes.selectedOption} key={option}>
-						{options.find(o => o.value === option)?.label}
-					</span>
-				))}
-				<span className={classes.selectedOption}>
-					+{selected.length - MAX_DISPLAY_ITEMS} options
-				</span>
-			</>
-		);
-	}
-
-	return selected.map(option => (
-		<span className={classes.selectedOption} key={option}>
-			{options.find(o => o.value === option)?.label}
-		</span>
-	));
+	const items = selectedLen === options.length ? '*' : selectedLen;
+	return <span className={classes.selectedOption}>All ({items})</span>;
 }
 
 MultipleSelect.propTypes = {

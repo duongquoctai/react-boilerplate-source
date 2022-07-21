@@ -23,7 +23,9 @@ const useStyles = makeStyles(theme => ({
 		width: '100%',
 		minWidth: '100%',
 		maxWidth: '100%',
-		maxHeight: '250px',
+		minHeight: '110px',
+		height: '110px',
+		maxHeight: '110px',
 		borderRadius: 6,
 		border: `solid 1px ${theme.palette.primary.light}`,
 		padding: '6px 12px',
@@ -65,8 +67,8 @@ function RequestInfo({ onChange, defaultValue = {} }) {
 			</Grid>
 			<Grid item xs={12} md={6}>
 				<Box className={classes.label}>Description</Box>
-				<TextareaAutosize
-					minRows={4}
+				<textarea
+					rows={4}
 					defaultValue={desc}
 					placeholder='Enter your ticket description'
 					className={classes.textarea}
