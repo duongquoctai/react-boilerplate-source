@@ -9,6 +9,7 @@ import {
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
+import { filter } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { useGetOutgoingRequestsQuery } from '~/redux/slices/access-permission';
 import SelectCustom from '../components/Select';
@@ -17,8 +18,11 @@ import {
 	CREATE_TIME_OPTIONS,
 	PAGE_LIMIT,
 } from '../constant';
+import { debounce } from '../helper';
 import DataTable from './DataTable';
 import RequestModal from './RequestModal';
+
+let searchTimeout = null;
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -64,38 +68,96 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
+const ALL_TYPE = -1;
+
 function OutgoingRequestView() {
 	const classes = useStyles();
 	const searchRef = useRef('');
+	const filter = useRef({
+		keyword: '',
+		type: ALL_TYPE,
+		created: ALL_TYPE,
+		sort: '',
+	});
+	const { isLoading, data = [] } = useGetOutgoingRequestsQuery();
+
+	const [requests, setRequests] = useState([]);
 	const [page, setPage] = useState(1);
-	const [totalPage, setTotalPage] = useState(10);
 	const [openRequestModal, setOpenRequestModal] = useState(false);
-	const { isLoading, data: requests } = useGetOutgoingRequestsQuery(
-		page,
-		PAGE_LIMIT,
+	const totalPage = Math.ceil(requests.length / PAGE_LIMIT);
+
+	const requestPaginated = requests.slice(
+		(page - 1) * PAGE_LIMIT,
+		page * PAGE_LIMIT,
 	);
 
+	const handleFilter = () => {
+		const { keyword, type, created, sort } = filter.current;
+		let newData = [...data];
+
+		if (type !== ALL_TYPE) {
+			newData = newData.filter(req => req.type === type);
+		}
+
+		if (created !== ALL_TYPE) {
+			newData = newData.filter(() => true);
+		}
+
+		if (keyword) {
+			newData = newData.filter(
+				req =>
+					req.ticketId?.includes(keyword) ||
+					req.name?.toLowerCase().includes(keyword) ||
+					req.owners.findIndex(o => o.name?.toLowerCase().includes(keyword)) !==
+						-1,
+			);
+		}
+
+		// Sort by name
+		if (sort === 'asc') {
+			newData.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
+		} else if (sort === 'desc') {
+			newData.sort((a, b) => (a.name > b.name ? -1 : a.name < b.name ? 1 : 0));
+		}
+
+		setPage(1);
+		setRequests(newData);
+	};
+
 	const handleChangeType = type => {
-		console.log(type);
+		filter.current.type = type;
+		handleFilter();
 	};
 
 	const handleCreateTimeChange = option => {
-		console.log(option);
+		filter.current.created = option;
+		handleFilter();
+	};
+
+	const handleSearch = e => {
+		if (data.length) {
+			searchTimeout = debounce(searchTimeout, 250, () => {
+				const keyword = e.target?.value.trim().toLowerCase();
+				filter.current.keyword = keyword;
+				handleFilter();
+			});
+		}
+	};
+
+	const handleSortByName = (sortType = 'asc') => {
+		filter.current.sort = sortType;
+		handleFilter();
 	};
 
 	const handleToggleModal = () => {
 		setOpenRequestModal(!openRequestModal);
 	};
 
-	// Search when press enter
 	useEffect(() => {
-		searchRef.current?.addEventListener('keydown', function(e) {
-			if (e.code === 'Enter') {
-				console.log(e.target.value.trim());
-			}
-		});
-		return () => searchRef.current?.removeEventListener('keydown', () => {});
-	}, []);
+		if (!isLoading) {
+			setRequests([...data]);
+		}
+	}, [isLoading]);
 
 	return (
 		<Container className={classes.root}>
@@ -108,6 +170,7 @@ function OutgoingRequestView() {
 					<InputBase
 						inputProps={{ ref: searchRef }}
 						className={classes.searchField}
+						onChange={handleSearch}
 						placeholder='Search requests ...'
 					/>
 					<Box className={classes.formControl}>
@@ -147,15 +210,17 @@ function OutgoingRequestView() {
 				</Box>
 			) : (
 				<>
-					<DataTable requests={requests} />
-					<Box mt={4} sx={{ display: 'flex', justifyContent: 'center' }}>
-						<Pagination
-							count={totalPage}
-							color='primary'
-							page={page}
-							onChange={(_, p) => setPage(p)}
-						/>
-					</Box>
+					<DataTable requests={requestPaginated} onSort={handleSortByName} />
+					{totalPage > 0 && (
+						<Box mt={4} sx={{ display: 'flex', justifyContent: 'center' }}>
+							<Pagination
+								count={totalPage}
+								color='primary'
+								page={page}
+								onChange={(_, p) => setPage(p)}
+							/>
+						</Box>
+					)}
 				</>
 			)}
 

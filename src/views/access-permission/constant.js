@@ -33,10 +33,6 @@ export const CREATE_TIME_OPTIONS = [
 		label: 'Anytime',
 		value: 1,
 	},
-	{
-		label: '3 months ago',
-		value: 2,
-	},
 ];
 
 export const PAGE_LIMIT = 5;

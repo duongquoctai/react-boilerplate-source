@@ -66,15 +66,15 @@ DataTable.propTypes = {
 	requests: PropTypes.array,
 };
 
-function DataTable({ requests = [] }) {
+function DataTable({ requests = [], onSort = () => {} }) {
 	const classes = useStyles();
 	const [sort, setSort] = useState('asc');
-	const SortIcon = sort === 'asc' ? ArrowDownwardIcon : ArrowUpwardIcon;
+	const SortIcon = sort === 'asc' ? ArrowUpwardIcon : ArrowDownwardIcon;
 
 	const handleSort = () => {
-		if (sort === 'asc') {
-			setSort('desc');
-		} else setSort('asc');
+		const newSort = sort === 'asc' ? 'desc' : 'asc';
+		setSort(newSort);
+		onSort(newSort);
 	};
 
 	return (

@@ -9,7 +9,7 @@ function FileSystem() {
 				alignItems: 'center',
 				justifyContent: 'center',
 				color: 'grey.500',
-				minHeight: '200px',
+				minHeight: '270px',
 			}}
 		>
 			Coming soon
