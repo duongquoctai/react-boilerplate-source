@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import { Box, Grid } from '@mui/material';
+import {
+	Box,
+	Checkbox,
+	FormControlLabel,
+	FormGroup,
+	Grid,
+	Radio,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { alpha } from '@mui/material/styles';
 import SelectCustom from '~/views/access-permission/components/Select';
-import { DATA_OWNERS } from '~/views/access-permission/constant';
+import {
+	DATA_OWNERS,
+	DB_OPTIONS,
+	RBAC,
+} from '~/views/access-permission/constant';
 import MultipleSelect from '~/views/access-permission/components/MultipleSelect';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -43,9 +54,24 @@ const useStyles = makeStyles(theme => ({
 		color: alpha('#000', 0.87),
 		fontSize: '14px',
 	},
+	checkboxGroup: {
+		border: `solid 1px ${theme.palette.primary.light}`,
+		borderRadius: '8px',
+		paddingLeft: '4px',
+		paddingRight: '4px',
+		height: '40px',
+
+		'& .MuiRadio-root': {
+			padding: '2px',
+		},
+	},
+	checkboxLabel: {
+		fontSize: '12px !important',
+		color: 'rgba(0, 0, 0, 0.6)',
+	},
 }));
 
-function ExternalRequestDataItem({
+function InternalRequestDataItem({
 	id = '',
 	onAddRow = () => {},
 	onDelete = () => {},
@@ -56,23 +82,13 @@ function ExternalRequestDataItem({
 	const classes = useStyles();
 	const [form, setForm] = useState(defaultValue);
 
-	const tagOptions =
-		DATA_OWNERS.find(o => o.value === form.ownerId)?.tags || [];
-	const tableOptions = tagOptions.length
-		? tagOptions.find(t => t.value === form.tag)?.tables || []
-		: [];
+	const tableOptions = DB_OPTIONS.find(t => t.value === form.db)?.tables || [];
 	const columnOptions = tableOptions.length
 		? tableOptions.find(t => t.value === form.table)?.columns || []
 		: [];
 
-	const handleOwnerChange = ownerId => {
-		const newForm = { ownerId, tag: '', table: '', columns: [] };
-		onChange({ id, ...newForm });
-		setForm(newForm);
-	};
-
-	const handleTagChange = tag => {
-		const newForm = { ownerId: form.ownerId, tag, table: '', columns: [] };
+	const handleDbChange = db => {
+		const newForm = { ...form, db, table: '', columns: [] };
 		onChange({ id, ...newForm });
 		setForm(newForm);
 	};
@@ -89,49 +105,38 @@ function ExternalRequestDataItem({
 		onChange({ id, ...newForm });
 	};
 
+	const handleRbacChange = rbac => {
+		const newForm = { ...form, rbac: [...form.rbac, rbac] };
+		setForm(newForm);
+		onChange({ id, ...newForm });
+	};
+
 	return (
 		<Box>
 			<Grid container columnSpacing={2}>
 				<Grid item xs={10} sm={11}>
-					<Grid container spacing={4.5}>
+					<Grid container spacing={2}>
 						<Grid item xs={12} sm={6} md={3}>
-							<Box className={classes.label}>Data owner</Box>
+							<Box className={classes.label}>Database</Box>
 							<SelectCustom
 								showPlaceholderInValue={false}
-								options={DATA_OWNERS}
-								placeholder='Select table and their columns'
+								placeholder='Select database'
+								selectProps={{
+									size: 'small',
+									className: classes.select,
+									value: form.db,
+								}}
+								options={DB_OPTIONS}
 								formControlClass={classes.select}
-								selectProps={{
-									size: 'small',
-									className: classes.select,
-									value: form.ownerId,
-								}}
-								onChange={handleOwnerChange}
-							/>
-						</Grid>
-						<Grid item xs={12} sm={6} md={3}>
-							<Box className={classes.label}>Tag</Box>
-							<SelectCustom
-								showPlaceholderInValue={false}
-								placeholder='Select table and their columns'
-								selectProps={{
-									size: 'small',
-									className: classes.select,
-									value: form.tag,
-								}}
-								options={tagOptions}
-								formControlClass={`${classes.select} ${
-									!form.ownerId ? 'disabled' : ''
-								}`}
-								defaultValue={defaultValue.tag}
-								onChange={handleTagChange}
+								defaultValue={defaultValue.db}
+								onChange={handleDbChange}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6} md={3}>
 							<Box className={classes.label}>Table</Box>
 							<SelectCustom
 								showPlaceholderInValue={false}
-								placeholder='Select table and their columns'
+								placeholder='Select tables'
 								selectProps={{
 									size: 'small',
 									className: classes.select,
@@ -139,7 +144,7 @@ function ExternalRequestDataItem({
 								}}
 								options={tableOptions}
 								formControlClass={`${classes.select} ${
-									!form.tag ? 'disabled' : ''
+									!form.db ? 'disabled' : ''
 								}`}
 								defaultValue={defaultValue.table}
 								onChange={handleTableChange}
@@ -160,6 +165,46 @@ function ExternalRequestDataItem({
 								}}
 								onChange={handleColumnChange}
 							/>
+						</Grid>
+						<Grid item xs={12} sm={6} md={3}>
+							<Box className={classes.label}>Roled-base access control</Box>
+							<Stack
+								direction='row'
+								spacing={0.5}
+								className={classes.checkboxGroup}
+							>
+								<Stack spacing={0.25} direction='row' alignItems='center'>
+									<Radio
+										size='small'
+										id='read'
+										checked={form.rbac?.includes(RBAC.READ)}
+										onChange={_ => handleRbacChange(RBAC.READ)}
+									/>
+									<label className={classes.checkboxLabel} htmlFor='read'>
+										Read
+									</label>
+								</Stack>
+								<Stack spacing={0.25} direction='row' alignItems='center'>
+									<Radio
+										size='small'
+										id='write'
+										checked={form.rbac?.includes(RBAC.WRITE)}
+										onChange={_ => handleRbacChange(RBAC.WRITE)}
+									/>
+									<label htmlFor='write' className={classes.checkboxLabel}>
+										Write
+									</label>
+								</Stack>
+								<Stack spacing={0.25} direction='row' alignItems='center'>
+									<Radio size='small' disabled />
+									<label
+										className={classes.checkboxLabel}
+										style={{ color: 'rgba(151, 151, 151, 0.8)' }}
+									>
+										Execute
+									</label>
+								</Stack>
+							</Stack>
 						</Grid>
 					</Grid>
 				</Grid>
@@ -188,4 +233,4 @@ function ExternalRequestDataItem({
 	);
 }
 
-export default ExternalRequestDataItem;
+export default InternalRequestDataItem;

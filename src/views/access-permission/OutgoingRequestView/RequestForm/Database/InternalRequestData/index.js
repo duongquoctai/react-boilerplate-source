@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Stack } from '@mui/material';
-import ExternalRequestDataItem from './Item';
+import InternalRequestDataItem from './Item';
 
-function ExternalRequestData({
+function InternalRequestData({
 	onChange = () => {},
 	onDelete = () => {},
 	defaultValue = [],
@@ -25,7 +25,7 @@ function ExternalRequestData({
 	return (
 		<Stack spacing={2} sx={{ maxHeight: '350px', overflow: 'auto' }}>
 			{rows.map(row => (
-				<ExternalRequestDataItem
+				<InternalRequestDataItem
 					key={row.id}
 					id={row.id}
 					onAddRow={handleAddRow}
@@ -39,4 +39,4 @@ function ExternalRequestData({
 	);
 }
 
-export default ExternalRequestData;
+export default InternalRequestData;

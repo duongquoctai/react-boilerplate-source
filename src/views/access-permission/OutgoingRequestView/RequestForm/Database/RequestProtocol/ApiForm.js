@@ -80,7 +80,7 @@ const schema = yup.object().shape({
 		.string()
 		.required()
 		.matches(
-			/^(\d|\_|\-\[a-z]|[A-Z])+$/,
+			/^(\d|\_|\-|[a-z]|[A-Z])+$/,
 			'The database name consists of characters a-zA-Z[0-9]_-',
 		),
 });

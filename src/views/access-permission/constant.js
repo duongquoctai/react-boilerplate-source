@@ -192,6 +192,57 @@ export const DATA_OWNERS = [
 	},
 ];
 
+export const DB_OPTIONS = [
+	{
+		value: '1',
+		label: 'PostgreSQL',
+		tables: [
+			{
+				value: 1,
+				label: 'Table 1',
+				columns: [
+					{ value: 1, label: 'Column 1' },
+					{ value: 2, label: 'Column 2' },
+					{ value: 15, label: 'Column 15' },
+				],
+			},
+			{
+				value: 2,
+				label: 'Table 2',
+				columns: [
+					{ value: 1, label: 'Column X' },
+					{ value: 2, label: 'Column Y' },
+					{ value: 15, label: 'Column Z' },
+				],
+			},
+		],
+	},
+	{
+		value: '2',
+		label: 'Hive',
+		tables: [
+			{
+				value: 1,
+				label: 'Table 1',
+				columns: [
+					{ value: 1, label: 'Column 5' },
+					{ value: 2, label: 'Column 21' },
+					{ value: 15, label: 'Column 151' },
+				],
+			},
+			{
+				value: 2,
+				label: 'Table 2',
+				columns: [
+					{ value: 1, label: 'Column AX' },
+					{ value: 2, label: 'Column ZY' },
+					{ value: 15, label: 'Column AZ' },
+				],
+			},
+		],
+	},
+];
+
 export const FULFILL_REQUESTS = [{ label: 'API', value: 'api' }];
 
 export const REQUEST_FREQUENCIES = [{ label: 'Weekly', value: 1 }];
@@ -199,4 +250,10 @@ export const REQUEST_FREQUENCIES = [{ label: 'Weekly', value: 1 }];
 export const REQUEST_ROLE = {
 	INTERNAL: 'CADS Internal',
 	EXTERNAL: 'External',
+};
+
+export const RBAC = {
+	READ: 'read',
+	WRITE: 'write',
+	EXECUTE: 'execute',
 };

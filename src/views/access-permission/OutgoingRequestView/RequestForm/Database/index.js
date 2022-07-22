@@ -9,6 +9,7 @@ import RequestProtocol from './RequestProtocol';
 import ExternalRequestData from './ExternalRequestData';
 import CircularProgress from '@mui/material/CircularProgress';
 import { REQUEST_ROLE } from '~/views/access-permission/constant';
+import InternalRequestData from './InternalRequestData';
 
 const STEPS = [
 	{ key: 'info', title: '1. Request Info' },
@@ -41,7 +42,9 @@ const initialForm = {
 	externalData: [
 		{ id: Date.now().toString(), ownerId: '', tag: '', table: '', columns: [] },
 	],
-	internalData: [],
+	internalData: [
+		{ id: Date.now().toString(), db: '', table: '', columns: [], rbac: [] },
+	],
 	protocol: {
 		type: '',
 		data: {},
@@ -77,7 +80,18 @@ const yupSchemas = {
 				columns: yup.array().required(),
 			}),
 		),
-	internalData: yup.array().required(),
+	internalData: yup
+		.array()
+		.required()
+		.of(
+			yup.object().shape({
+				id: yup.string().required(),
+				db: yup.string().required(),
+				table: yup.string().required(),
+				columns: yup.array().required(),
+				rbac: yup.array().required(),
+			}),
+		),
 	protocol: yup.object().shape({
 		type: yup.number().required(),
 		data: yup.object().required(),
@@ -94,7 +108,7 @@ function checkDataStep(stepKey, role) {
 }
 
 function DatabaseSteps({ onSendSuccess }) {
-	const [currentStep, setCurrentStep] = useState(1);
+	const [currentStep, setCurrentStep] = useState(0);
 	const [isValidStep, setIsValidStep] = useState(false);
 	const [sending, setSending] = useState(false);
 	const form = useRef(JSON.parse(JSON.stringify(saveForm)));
@@ -161,24 +175,27 @@ function DatabaseSteps({ onSendSuccess }) {
 		}
 	};
 
-	// Internal request data
-	const handleOwnerExternalDataChange = row => {
-		const index = form.current.externalData.findIndex(d => d.id === row.id);
+	const handleRequestDataChange = row => {
+		const roleKey =
+			role === REQUEST_ROLE.EXTERNAL ? 'externalData' : 'internalData';
+
+		const index = form.current[roleKey].findIndex(d => d.id === row.id);
 		if (index === -1) {
-			form.current.externalData.push(row);
+			form.current[roleKey].push(row);
 		} else {
-			form.current.externalData[index] = { ...row };
+			form.current[roleKey][index] = { ...row };
 		}
-		validateStep('externalData');
+		validateStep(roleKey);
 	};
 
-	const handleOwnerExternalDataDelete = id => {
-		const newData = form.current.externalData.filter(d => d.id !== id);
-		form.current.externalData = newData;
-		validateStep('externalData');
-	};
+	const handleRequestDataDelete = id => {
+		const roleKey =
+			role === REQUEST_ROLE.EXTERNAL ? 'externalData' : 'internalData';
 
-	// External request data
+		const newData = form.current[roleKey].filter(d => d.id !== id);
+		form.current[roleKey] = newData;
+		validateStep(roleKey);
+	};
 
 	const handleProtocolChange = (valid, formValue) => {
 		setIsValidStep(valid);
@@ -230,13 +247,20 @@ function DatabaseSteps({ onSendSuccess }) {
 						defaultValue={form.current.info}
 					/>
 				)}
-				{currentStep === 1 && (
-					<ExternalRequestData
-						onChange={handleOwnerExternalDataChange}
-						onDelete={handleOwnerExternalDataDelete}
-						defaultValue={form.current.externalData}
-					/>
-				)}
+				{currentStep === 1 &&
+					(role === REQUEST_ROLE.EXTERNAL ? (
+						<ExternalRequestData
+							onChange={handleRequestDataChange}
+							onDelete={handleRequestDataDelete}
+							defaultValue={form.current.externalData}
+						/>
+					) : (
+						<InternalRequestData
+							onChange={handleRequestDataChange}
+							onDelete={handleRequestDataDelete}
+							defaultValue={form.current.internalData}
+						/>
+					))}
 				{currentStep === 2 && (
 					<RequestProtocol
 						onChange={handleProtocolChange}
