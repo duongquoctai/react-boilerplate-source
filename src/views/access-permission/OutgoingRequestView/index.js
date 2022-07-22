@@ -83,7 +83,7 @@ function OutgoingRequestView() {
 
 	const [requests, setRequests] = useState([]);
 	const [page, setPage] = useState(1);
-	const [openRequestModal, setOpenRequestModal] = useState(false);
+	const [openRequestModal, setOpenRequestModal] = useState(true);
 	const totalPage = Math.ceil(requests.length / PAGE_LIMIT);
 
 	const requestPaginated = requests.slice(

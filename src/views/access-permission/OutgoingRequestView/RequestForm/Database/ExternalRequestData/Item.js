@@ -151,7 +151,7 @@ function RequestDataItem({
 								placeholder='Select table and their columns'
 								options={columnOptions}
 								formControlClass={`${classes.select} ${
-									!form.tag ? 'disabled' : ''
+									!form.table ? 'disabled' : ''
 								}`}
 								selectProps={{
 									size: 'small',

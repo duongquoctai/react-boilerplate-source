@@ -195,3 +195,8 @@ export const DATA_OWNERS = [
 export const FULFILL_REQUESTS = [{ label: 'API', value: 'api' }];
 
 export const REQUEST_FREQUENCIES = [{ label: 'Weekly', value: 1 }];
+
+export const REQUEST_ROLE = {
+	INTERNAL: 'CADS Internal',
+	EXTERNAL: 'External',
+};

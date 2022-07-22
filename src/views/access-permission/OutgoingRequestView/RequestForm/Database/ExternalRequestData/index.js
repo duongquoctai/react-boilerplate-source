@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 import RequestDataItem from './Item';
 
-function RequestData({
+function ExternalRequestData({
 	onChange = () => {},
 	onDelete = () => {},
 	defaultValue = [],
@@ -23,7 +23,7 @@ function RequestData({
 	};
 
 	return (
-		<Stack spacing={2}>
+		<Stack spacing={2} sx={{ maxHeight: '350px', overflow: 'auto' }}>
 			{rows.map(row => (
 				<RequestDataItem
 					key={row.id}
@@ -39,4 +39,4 @@ function RequestData({
 	);
 }
 
-export default RequestData;
+export default ExternalRequestData;

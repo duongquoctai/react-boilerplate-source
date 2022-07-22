@@ -6,8 +6,9 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { makeStyles } from '@mui/styles';
 import RequestProtocol from './RequestProtocol';
-import RequestData from './RequestData';
+import ExternalRequestData from './ExternalRequestData';
 import CircularProgress from '@mui/material/CircularProgress';
+import { REQUEST_ROLE } from '~/views/access-permission/constant';
 
 const STEPS = [
 	{ key: 'info', title: '1. Request Info' },
@@ -37,16 +38,15 @@ const initialForm = {
 		duration: -1,
 		desc: '',
 	},
-	data: [
+	externalData: [
 		{ id: Date.now().toString(), ownerId: '', tag: '', table: '', columns: [] },
 	],
+	internalData: [],
 	protocol: {
 		type: '',
 		data: {},
 	},
 };
-
-let saveForm = JSON.parse(JSON.stringify(initialForm));
 
 const yupSchemas = {
 	info: yup.object().shape({
@@ -65,7 +65,7 @@ const yupSchemas = {
 			.typeError('Descriptions a required field')
 			.required('Description is a required field'),
 	}),
-	data: yup
+	externalData: yup
 		.array()
 		.required()
 		.of(
@@ -77,20 +77,32 @@ const yupSchemas = {
 				columns: yup.array().required(),
 			}),
 		),
+	internalData: yup.array().required(),
 	protocol: yup.object().shape({
 		type: yup.number().required(),
 		data: yup.object().required(),
 	}),
 };
 
+let saveForm = JSON.parse(JSON.stringify(initialForm));
+
+function checkDataStep(stepKey, role) {
+	if (stepKey === 'data') {
+		return role === REQUEST_ROLE.EXTERNAL ? 'externalData' : 'internalData';
+	}
+	return stepKey;
+}
+
 function DatabaseSteps({ onSendSuccess }) {
-	const [currentStep, setCurrentStep] = useState(0);
+	const [currentStep, setCurrentStep] = useState(1);
 	const [isValidStep, setIsValidStep] = useState(false);
 	const [sending, setSending] = useState(false);
 	const form = useRef(JSON.parse(JSON.stringify(saveForm)));
 	const classes = useStyles({ isValidStep });
+	const role = REQUEST_ROLE.EXTERNAL;
 
 	const validateStep = stepKey => {
+		stepKey = checkDataStep(stepKey, role);
 		const yupValidator = yupSchemas[stepKey];
 		if (yupValidator) {
 			yupValidator.isValid(form.current[stepKey]).then(valid => {
@@ -107,7 +119,7 @@ function DatabaseSteps({ onSendSuccess }) {
 	const handleNextStep = () => {
 		if (currentStep === STEPS.length - 1 || !isValidStep) return;
 
-		const stepKey = STEPS[currentStep].key;
+		let stepKey = checkDataStep(STEPS[currentStep].key, role);
 		const yupValidator = yupSchemas[stepKey];
 		const stepData = form.current[stepKey];
 
@@ -137,7 +149,7 @@ function DatabaseSteps({ onSendSuccess }) {
 		if (step === 0) setCurrentStep(step);
 		else {
 			// check validate previous step
-			const stepKey = STEPS[step - 1].key;
+			const stepKey = checkDataStep(STEPS[step - 1].key, role);
 			const yupValidator = yupSchemas[stepKey];
 			if (yupValidator) {
 				yupValidator.isValid(form.current[stepKey]).then(valid => {
@@ -149,21 +161,24 @@ function DatabaseSteps({ onSendSuccess }) {
 		}
 	};
 
-	const handleOwnerDataChange = row => {
-		const index = form.current.data.findIndex(d => d.id === row.id);
+	// Internal request data
+	const handleOwnerExternalDataChange = row => {
+		const index = form.current.externalData.findIndex(d => d.id === row.id);
 		if (index === -1) {
-			form.current.data.push(row);
+			form.current.externalData.push(row);
 		} else {
-			form.current.data[index] = { ...row };
+			form.current.externalData[index] = { ...row };
 		}
-		validateStep('data');
+		validateStep('externalData');
 	};
 
-	const handleOwnerDataDelete = id => {
-		const newData = form.current.data.filter(d => d.id !== id);
-		form.current.data = newData;
-		validateStep('data');
+	const handleOwnerExternalDataDelete = id => {
+		const newData = form.current.externalData.filter(d => d.id !== id);
+		form.current.externalData = newData;
+		validateStep('externalData');
 	};
+
+	// External request data
 
 	const handleProtocolChange = (valid, formValue) => {
 		setIsValidStep(valid);
@@ -216,10 +231,10 @@ function DatabaseSteps({ onSendSuccess }) {
 					/>
 				)}
 				{currentStep === 1 && (
-					<RequestData
-						onChange={handleOwnerDataChange}
-						onDelete={handleOwnerDataDelete}
-						defaultValue={form.current.data}
+					<ExternalRequestData
+						onChange={handleOwnerExternalDataChange}
+						onDelete={handleOwnerExternalDataDelete}
+						defaultValue={form.current.externalData}
 					/>
 				)}
 				{currentStep === 2 && (
