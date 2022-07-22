@@ -37,12 +37,16 @@ const initialForm = {
 		duration: -1,
 		desc: '',
 	},
-	data: [{ id: Date.now().toString(), ownerId: '', tag: '', columns: [] }],
+	data: [
+		{ id: Date.now().toString(), ownerId: '', tag: '', table: '', columns: [] },
+	],
 	protocol: {
 		type: '',
 		data: {},
 	},
 };
+
+let saveForm = JSON.parse(JSON.stringify(initialForm));
 
 const yupSchemas = {
 	info: yup.object().shape({
@@ -69,6 +73,7 @@ const yupSchemas = {
 				id: yup.string().required(),
 				ownerId: yup.string().required(),
 				tag: yup.string().required(),
+				table: yup.string().required(),
 				columns: yup.array().required(),
 			}),
 		),
@@ -82,7 +87,7 @@ function DatabaseSteps({ onSendSuccess }) {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [isValidStep, setIsValidStep] = useState(false);
 	const [sending, setSending] = useState(false);
-	const form = useRef(JSON.parse(JSON.stringify(initialForm)));
+	const form = useRef(JSON.parse(JSON.stringify(saveForm)));
 	const classes = useStyles({ isValidStep });
 
 	const validateStep = stepKey => {
@@ -181,6 +186,12 @@ function DatabaseSteps({ onSendSuccess }) {
 		const stepKey = STEPS[currentStep].key;
 		validateStep(stepKey);
 	}, [currentStep]);
+
+	useEffect(() => {
+		return () => {
+			saveForm = JSON.parse(JSON.stringify(form.current));
+		};
+	}, []);
 
 	return (
 		<Box className={classes.root}>

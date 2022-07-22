@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { commonStyles } from '.';
@@ -62,7 +62,7 @@ const schema = yup.object().shape({
 	numOfRows: yup
 		.number()
 		.required()
-		.min(0, `The maximum number of rows is 0`)
+		.min(1, `The maximum number of rows is 1`)
 		.max(MAX_NUM_OF_ROWS, `The maximum number of rows is ${MAX_NUM_OF_ROWS}`),
 	serverIP: yup
 		.string()
@@ -72,12 +72,10 @@ const schema = yup.object().shape({
 		),
 	host: yup.string().required(),
 	port: yup
-		.string('Invalid port')
+		.number('Invalid port')
 		.required('Port is required')
-		.matches(
-			/^((6553[0-5])|(655[0-2][0-9])|(65[0-4][0-9]{2})|(6[0-4][0-9]{3})|([1-5][0-9]{4})|([0-5]{0,5})|([0-9]{1,4}))$/,
-			'Invalid port',
-		),
+		.min(1, 'Invalid port')
+		.max(65535, 'Invalid port'),
 	dbName: yup
 		.string()
 		.required()
@@ -87,44 +85,54 @@ const schema = yup.object().shape({
 		),
 });
 
+let saveForm = {
+	frequency: '',
+	numOfRows: '',
+	serverIP: '',
+	port: '',
+	dbName: '',
+};
+
 function ApiForm({ onChange, defaultValue = {} }) {
 	const classes = useStyles();
 	const [error, setError] = useState('');
-	const form = useRef({
-		frequency: '',
-		numOfRows: '',
-		serverIP: '',
-		port: '',
-		dbName: '',
-	});
+	const form = useRef({ ...saveForm });
+	const isFulfill = useRef(false);
+
+	const validateForm = () => {
+		// show error if exist & fulfill
+		if (!isFulfill.current) {
+			isFulfill.current = true;
+			for (let k in form.current) {
+				if (!form.current[k]) isFulfill.current = false;
+			}
+		}
+
+		if (isFulfill.current) {
+			schema
+				.validate(form.current)
+				.then(() => {
+					setError('');
+					onChange(true, form.current);
+				})
+				.catch(err => {
+					setError(err.message);
+					onChange(false, form.current);
+				});
+		} else {
+			schema.isValid(form.current).then(valid => onChange(valid, form.current));
+		}
+	};
 
 	const handleChange = (field, value) => {
 		form.current[field] = value;
-		timeout = debounce(timeout, 250, () => {
-			// show error if exist & fulfill
-			let isFulfill = true;
-			for (let k in form.current) {
-				if (!form.current[k]) isFulfill = false;
-			}
-
-			if (isFulfill) {
-				schema
-					.validate(form.current)
-					.then(() => {
-						setError('');
-						onChange(true, form.current);
-					})
-					.catch(err => {
-						setError(err.message);
-						onChange(false, form.current);
-					});
-			} else {
-				schema
-					.isValid(form.current)
-					.then(valid => onChange(valid, form.current));
-			}
-		});
+		timeout = debounce(timeout, 250, validateForm);
 	};
+
+	useEffect(() => {
+		validateForm();
+		return () => (saveForm = { ...form.current });
+	}, []);
 
 	return (
 		<Box className={classes.root}>

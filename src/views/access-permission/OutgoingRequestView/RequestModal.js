@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
 function RequestModal({ open = false, onClose = () => {} }) {
 	const classes = useStyles();
 	const [requestType, setRequestType] = useState(REQUEST_TYPES[0]);
+	const role = 'External';
 
 	const handleSendSuccess = () => {
 		toast.success('Send request successfully');
@@ -75,7 +76,7 @@ function RequestModal({ open = false, onClose = () => {} }) {
 				<Box className={classes.title}>
 					<span className='main'>Create new Outgoing request</span>
 					<Box sx={{ display: 'flex', alignItems: 'center' }}>
-						<span className='role'>Internal</span>
+						<span className='role'>{role}</span>
 						<CloseIcon
 							sx={{ cursor: 'pointer', ml: 1, color: 'grey.500' }}
 							onClick={onClose}

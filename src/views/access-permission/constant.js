@@ -67,18 +67,49 @@ export const DATA_OWNERS = [
 			{
 				value: 1,
 				label: 'Tag 1',
-				columns: [
-					{ value: 1, label: 'Column 1' },
-					{ value: 2, label: 'Column 2' },
-					{ value: 15, label: 'Column 15' },
+				tables: [
+					{
+						value: 1,
+						label: 'Table 1',
+						columns: [
+							{ value: 1, label: 'Column 1' },
+							{ value: 2, label: 'Column 2' },
+							{ value: 15, label: 'Column 15' },
+						],
+					},
+					{
+						value: 2,
+						label: 'Table 2',
+						columns: [
+							{ value: 1, label: 'Column X' },
+							{ value: 2, label: 'Column Y' },
+							{ value: 15, label: 'Column Z' },
+						],
+					},
 				],
 			},
 			{
 				value: 2,
 				label: 'Tag 2',
-				columns: [
-					{ value: 3, label: 'Column 3' },
-					{ value: 4, label: 'Column 3' },
+				tables: [
+					{
+						value: 1,
+						label: 'Table 1',
+						columns: [
+							{ value: 1, label: 'Column 1' },
+							{ value: 2, label: 'Column 2' },
+							{ value: 15, label: 'Column 15' },
+						],
+					},
+					{
+						value: 2,
+						label: 'Table 2',
+						columns: [
+							{ value: 1, label: 'Column X' },
+							{ value: 2, label: 'Column Y' },
+							{ value: 15, label: 'Column Z' },
+						],
+					},
 				],
 			},
 		],
@@ -90,17 +121,49 @@ export const DATA_OWNERS = [
 			{
 				value: 3,
 				label: 'Tag 3',
-				columns: [
-					{ value: 5, label: 'Column 5' },
-					{ value: 6, label: 'Column 6' },
+				tables: [
+					{
+						value: 1,
+						label: 'Table 1',
+						columns: [
+							{ value: 1, label: 'Column 1' },
+							{ value: 2, label: 'Column 2' },
+							{ value: 15, label: 'Column 15' },
+						],
+					},
+					{
+						value: 2,
+						label: 'Table 2',
+						columns: [
+							{ value: 1, label: 'Column X' },
+							{ value: 2, label: 'Column Y' },
+							{ value: 15, label: 'Column Z' },
+						],
+					},
 				],
 			},
 			{
 				value: 4,
 				label: 'Tag 4',
-				columns: [
-					{ value: 7, label: 'Column 7' },
-					{ value: 8, label: 'Column 8' },
+				tables: [
+					{
+						value: 1,
+						label: 'Table 1',
+						columns: [
+							{ value: 1, label: 'Column 1' },
+							{ value: 2, label: 'Column 2' },
+							{ value: 15, label: 'Column 15' },
+						],
+					},
+					{
+						value: 2,
+						label: 'Table 2',
+						columns: [
+							{ value: 1, label: 'Column X' },
+							{ value: 2, label: 'Column Y' },
+							{ value: 15, label: 'Column Z' },
+						],
+					},
 				],
 			},
 		],

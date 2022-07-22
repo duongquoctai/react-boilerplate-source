@@ -11,7 +11,7 @@ function RequestData({
 
 	const handleAddRow = () => {
 		const id = Date.now().toString();
-		setRows([...rows, { id, ownerId: '', tag: '', columns: [] }]);
+		setRows([...rows, { id, ownerId: '', tag: '', table: '', columns: [] }]);
 	};
 
 	const handleDelete = id => {

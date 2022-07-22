@@ -58,18 +58,27 @@ function RequestDataItem({
 
 	const tagOptions =
 		DATA_OWNERS.find(o => o.value === form.ownerId)?.tags || [];
-	const columnOptions = tagOptions.length
-		? tagOptions.find(t => t.value === form.tag)?.columns || []
+	const tableOptions = tagOptions.length
+		? tagOptions.find(t => t.value === form.tag)?.tables || []
+		: [];
+	const columnOptions = tableOptions.length
+		? tableOptions.find(t => t.value === form.table)?.columns || []
 		: [];
 
 	const handleOwnerChange = ownerId => {
-		const newForm = { ownerId, tag: '', columns: [] };
+		const newForm = { ownerId, tag: '', table: '', columns: [] };
 		onChange({ id, ...newForm });
 		setForm(newForm);
 	};
 
 	const handleTagChange = tag => {
-		const newForm = { ownerId: form.ownerId, tag, columns: [] };
+		const newForm = { ownerId: form.ownerId, tag, table: '', columns: [] };
+		onChange({ id, ...newForm });
+		setForm(newForm);
+	};
+
+	const handleTableChange = table => {
+		const newForm = { ...form, table, columns: [] };
 		onChange({ id, ...newForm });
 		setForm(newForm);
 	};
@@ -85,7 +94,7 @@ function RequestDataItem({
 			<Grid container columnSpacing={2}>
 				<Grid item xs={10} sm={11}>
 					<Grid container spacing={4.5}>
-						<Grid item xs={12} sm={6} md={4}>
+						<Grid item xs={12} sm={6} md={3}>
 							<Box className={classes.label}>Data owner</Box>
 							<SelectCustom
 								showPlaceholderInValue={false}
@@ -100,8 +109,8 @@ function RequestDataItem({
 								onChange={handleOwnerChange}
 							/>
 						</Grid>
-						<Grid item xs={12} sm={6} md={4}>
-							<Box className={classes.label}>Tag:values</Box>
+						<Grid item xs={12} sm={6} md={3}>
+							<Box className={classes.label}>Tag</Box>
 							<SelectCustom
 								showPlaceholderInValue={false}
 								placeholder='Select table and their columns'
@@ -118,8 +127,26 @@ function RequestDataItem({
 								onChange={handleTagChange}
 							/>
 						</Grid>
-						<Grid item xs={12} sm={6} md={4}>
-							<Box className={classes.label}>Table:columns</Box>
+						<Grid item xs={12} sm={6} md={3}>
+							<Box className={classes.label}>Table</Box>
+							<SelectCustom
+								showPlaceholderInValue={false}
+								placeholder='Select table and their columns'
+								selectProps={{
+									size: 'small',
+									className: classes.select,
+									value: form.table,
+								}}
+								options={tableOptions}
+								formControlClass={`${classes.select} ${
+									!form.tag ? 'disabled' : ''
+								}`}
+								defaultValue={defaultValue.table}
+								onChange={handleTableChange}
+							/>
+						</Grid>
+						<Grid item xs={12} sm={6} md={3}>
+							<Box className={classes.label}>Columns</Box>
 							<MultipleSelect
 								placeholder='Select table and their columns'
 								options={columnOptions}
