@@ -5,10 +5,10 @@ import HomeLayout from '~/layouts/HomeLayout';
 // ----------------------------------------------------------------------
 
 const HomeRoutes = {
-  path: '*',
-  layout: HomeLayout,
-  routes: [
-    {
+	path: '*',
+	layout: HomeLayout,
+	routes: [
+		/*  {
       exact: true,
       path: '/',
       component: () => <Redirect to="/app/dashboard" />
@@ -17,11 +17,11 @@ const HomeRoutes = {
       exact: true,
       path: '/components',
       component: lazy(() => import('~/views/home/ComponentsView'))
-    },
-    {
-      component: () => <Redirect to="/404" />
-    }
-  ]
+    }, */
+		{
+			component: () => <Redirect to='/access-permission/outgoing' />,
+		},
+	],
 };
 
 export default HomeRoutes;

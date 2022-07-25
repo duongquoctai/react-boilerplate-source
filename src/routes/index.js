@@ -92,7 +92,7 @@ export function renderRoutes(routes = []) {
 
 const routes = [
 	// Others Routes
-	{
+	/* {
 		exact: true,
 		guard: GuestProtect,
 		path: PATH_PAGE.auth.login,
@@ -164,7 +164,7 @@ const routes = [
 	AppRoutes,
 
 	// Docs Routes
-	DocsRoutes,
+	DocsRoutes, */
 
 	// Access Permission
 	AccessPermissionRoutes,
