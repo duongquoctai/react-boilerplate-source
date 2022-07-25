@@ -7,9 +7,20 @@ export const accessPermissionApi = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
 	endpoints: builder => ({
 		getOutgoingRequests: builder.query({
-			query: () => `outgoingRequests`,
+			query: () => 'urp/outgoing-requests',
+		}),
+		addOutgoingRequest: builder.mutation({
+			query: form => ({
+				url: 'urp/outgoing-requests',
+				method: 'POST',
+				body: form,
+			}),
 		}),
 	}),
 });
 
-export const { useGetOutgoingRequestsQuery } = accessPermissionApi;
+export const {
+	useGetOutgoingRequestsQuery,
+	useLazyGetOutgoingRequestsQuery,
+	useAddOutgoingRequestMutation,
+} = accessPermissionApi;

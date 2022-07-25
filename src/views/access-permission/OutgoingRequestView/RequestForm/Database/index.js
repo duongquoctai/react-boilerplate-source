@@ -8,8 +8,12 @@ import { makeStyles } from '@mui/styles';
 import RequestProtocol from './RequestProtocol';
 import ExternalRequestData from './ExternalRequestData';
 import CircularProgress from '@mui/material/CircularProgress';
-import { REQUEST_ROLE } from '~/views/access-permission/constant';
+import {
+	REQUEST_ROLE,
+	REQUEST_TYPE_OPTIONS,
+} from '~/views/access-permission/constant';
 import InternalRequestData from './InternalRequestData';
+import { useAddOutgoingRequestMutation } from '~/redux/slices/access-permission';
 
 const STEPS = [
 	{ key: 'info', title: '1. Request Info' },
@@ -110,10 +114,14 @@ function checkDataStep(stepKey, role) {
 function DatabaseSteps({ onSendSuccess }) {
 	const [currentStep, setCurrentStep] = useState(0);
 	const [isValidStep, setIsValidStep] = useState(false);
-	const [sending, setSending] = useState(false);
 	const form = useRef(JSON.parse(JSON.stringify(saveForm)));
 	const classes = useStyles({ isValidStep });
 	const role = REQUEST_ROLE.EXTERNAL;
+	const [
+		addOutgoingRequest,
+		addRequestResult,
+	] = useAddOutgoingRequestMutation();
+	const { isLoading: isSending } = addRequestResult;
 
 	const validateStep = stepKey => {
 		stepKey = checkDataStep(stepKey, role);
@@ -204,14 +212,7 @@ function DatabaseSteps({ onSendSuccess }) {
 
 	const handleSendRequest = () => {
 		console.log(form.current);
-		setSending(true);
-		setTimeout(() => {
-			form.current = JSON.parse(JSON.stringify(initialForm));
-			onSendSuccess && onSendSuccess();
-			setCurrentStep(0);
-			setIsValidStep(false);
-			setSending(false);
-		}, 3000);
+		addOutgoingRequest({ ...form.current, type: 1 });
 	};
 
 	useEffect(() => {
@@ -224,6 +225,20 @@ function DatabaseSteps({ onSendSuccess }) {
 			saveForm = JSON.parse(JSON.stringify(form.current));
 		};
 	}, []);
+
+	useEffect(() => {
+		const { isError, isSuccess } = addRequestResult;
+
+		if (isError) {
+			return toast.error('Send request failed. Try again!');
+		}
+		if (isSuccess) {
+			toast.success('Send request successfully');
+			saveForm = JSON.parse(JSON.stringify(initialForm));
+			form.current = JSON.parse(JSON.stringify(initialForm));
+			onSendSuccess();
+		}
+	}, [addRequestResult]);
 
 	return (
 		<Box className={classes.root}>
@@ -296,7 +311,7 @@ function DatabaseSteps({ onSendSuccess }) {
 						variant='contained'
 						className={classes.continueBtn}
 						onClick={handleSendRequest}
-						disabled={sending}
+						disabled={isSending}
 						sx={{
 							backgroundColor: isValidStep
 								? 'primary.main'
@@ -306,7 +321,7 @@ function DatabaseSteps({ onSendSuccess }) {
 						}}
 					>
 						<span>Send</span>
-						{sending && (
+						{isSending && (
 							<CircularProgress size={16} sx={{ ml: 1 }} color='info' />
 						)}
 					</Button>

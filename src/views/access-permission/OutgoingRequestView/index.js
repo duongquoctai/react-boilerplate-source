@@ -79,7 +79,7 @@ function OutgoingRequestView() {
 		created: ALL_TYPE,
 		sort: '',
 	});
-	const { isLoading, data = [] } = useGetOutgoingRequestsQuery();
+	const { isFetching, data = [], refetch } = useGetOutgoingRequestsQuery();
 
 	const [requests, setRequests] = useState([]);
 	const [page, setPage] = useState(1);
@@ -153,11 +153,15 @@ function OutgoingRequestView() {
 		setOpenRequestModal(!openRequestModal);
 	};
 
+	const handleRefetchData = () => {
+		setTimeout(refetch, 500);
+	};
+
 	useEffect(() => {
-		if (!isLoading) {
+		if (!isFetching) {
 			setRequests([...data]);
 		}
-	}, [isLoading]);
+	}, [isFetching]);
 
 	return (
 		<Container className={classes.root}>
@@ -204,7 +208,7 @@ function OutgoingRequestView() {
 				</Button>
 			</Box>
 
-			{isLoading ? (
+			{isFetching ? (
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<CircularProgress />
 				</Box>
@@ -224,7 +228,11 @@ function OutgoingRequestView() {
 				</>
 			)}
 
-			<RequestModal open={openRequestModal} onClose={handleToggleModal} />
+			<RequestModal
+				open={openRequestModal}
+				onClose={handleToggleModal}
+				onRefetchData={handleRefetchData}
+			/>
 		</Container>
 	);
 }

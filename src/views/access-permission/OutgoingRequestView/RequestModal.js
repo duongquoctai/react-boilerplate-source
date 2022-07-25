@@ -8,7 +8,6 @@ import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import RequestForm from './RequestForm';
 import CloseIcon from '@mui/icons-material/Close';
-import { toast } from 'react-toastify';
 import { REQUEST_ROLE } from '../constant';
 
 const REQUEST_TYPES = ['Database', 'File System', 'Tools'];
@@ -61,14 +60,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-function RequestModal({ open = false, onClose = () => {} }) {
+function RequestModal({ open = false, onClose = () => {}, onRefetchData }) {
 	const classes = useStyles();
 	const [requestType, setRequestType] = useState(REQUEST_TYPES[0]);
 	const role = REQUEST_ROLE.EXTERNAL;
 
 	const handleSendSuccess = () => {
-		toast.success('Send request successfully');
 		onClose();
+		onRefetchData();
 	};
 
 	return (
